@@ -1,4 +1,6 @@
 "use client";
+import { useEffect, useRef } from "react";
+import { animate } from "animejs";
 import { motion } from "motion/react";
 import { Shield, Award, Palette, Truck, Clock, Users } from "lucide-react";
 
@@ -41,7 +43,56 @@ const features = [
   },
 ];
 
+const stats = [
+  { end: 99, suffix: "%", label: "Mamnun mijozlar" },
+  { end: 50, suffix: "K+", label: "Yetkazilgan mebellar" },
+  { end: 15, suffix: "+", label: "Mavjud davlatlar" },
+  { end: 100, suffix: "+", label: "Dizayn mukofotlari" },
+];
+
 export function WhyUs() {
+  const statsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const section = statsRef.current;
+    if (!section) return;
+
+    let hasAnimated = false;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || hasAnimated) return;
+        hasAnimated = true;
+
+        const nodes = section.querySelectorAll<HTMLElement>("[data-stat-value]");
+
+        stats.forEach((stat, index) => {
+          const node = nodes[index];
+          if (!node) return;
+
+          const counter = { value: 0 };
+
+          animate(counter, {
+            value: [0, stat.end],
+            duration: 3000,
+            delay: index * 120,
+            easing: "outExpo",
+            onUpdate: () => {
+              node.textContent = `${Math.floor(counter.value)}${stat.suffix}`;
+            },
+          });
+        });
+
+        observer.disconnect();
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className='relative w-full py-24 lg:py-32 overflow-hidden bg-greenDeep'>
       <div className='absolute inset-0 opacity-30'>
@@ -189,18 +240,14 @@ export function WhyUs() {
         </motion.div>
 
         <motion.div
+          ref={statsRef}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className='grid grid-cols-2 lg:grid-cols-4 gap-8 mt-20'
         >
-          {[
-            { value: "99%", label: "Mamnun mijozlar" },
-            { value: "50K+", label: "Yetkazilgan mebellar" },
-            { value: "15+", label: "Mavjud davlatlar" },
-            { value: "100+", label: "Dizayn mukofotlari" },
-          ].map((stat, index) => (
+          {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -209,8 +256,11 @@ export function WhyUs() {
               transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
               className='text-center p-6 rounded-2xl bg-white/5 border border-goldAccent/10'
             >
-              <div className='text-4xl lg:text-5xl mb-2 text-goldAccent font-light'>
-                {stat.value}
+              <div
+                data-stat-value
+                className='text-4xl lg:text-5xl mb-2 text-goldAccent font-light tabular-nums'
+              >
+                0{stat.suffix}
               </div>
               <div className='text-sm text-white/50'>{stat.label}</div>
             </motion.div>
