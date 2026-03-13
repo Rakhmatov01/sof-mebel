@@ -17,18 +17,21 @@ const brandFont = Mrs_Saint_Delafield({
   weight: ["400"],
   subsets: ["latin"],
   variable: "--font-brand",
+  display: "swap",
 });
 
 const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   subsets: ["latin"],
   variable: "--font-instrumental-serif",
+  display: "swap",
 });
 
 const manrope = Manrope({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-manrope",
+  display: "swap",
 });
 
 export default function RootLayout({
