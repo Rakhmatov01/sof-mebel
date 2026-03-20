@@ -94,14 +94,6 @@ const collections = [
   },
 ];
 
-const categories = [
-  "Barchasi",
-  "Divanlar va Burchakli Divanlar",
-  "Kreslolar",
-  "Dam Olish Kreslolari",
-  "Dekorativ Kreslolar",
-];
-
 export function Collections() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
@@ -185,35 +177,6 @@ export function Collections() {
                   <ArrowRight className='w-4 h-4' />
                 </motion.button>
               </div>
-
-              {/* <div className='space-y-3'>
-                <div className='flex items-start justify-between gap-4'>
-                  <div>
-                    <h3 className='text-2xl mb-1 text-greenDeep font-normal'>
-                      {item.name}
-                    </h3>
-                    <p className='text-sm text-greenDeep/50'>{item.category}</p>
-                  </div>
-                  <div className='text-lg whitespace-nowrap text-goldAccent font-medium'>
-                    {item.price}
-                  </div>
-                </div>
-
-                <p className='text-sm leading-relaxed text-greenDeep/60'>
-                  {item.description}
-                </p>
-
-                <motion.button
-                  className='flex items-center gap-2 pt-2 group/link'
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span className='text-sm text-greenDeep font-medium'>
-                    To&apos;liq kolleksiya
-                  </span>
-                  <ArrowRight className='w-4 h-4 text-goldAccent transition-transform group-hover/link:translate-x-1' />
-                </motion.button>
-              </div> */}
             </motion.div>
           ))}
         </div>

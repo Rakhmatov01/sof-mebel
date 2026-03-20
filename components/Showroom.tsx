@@ -187,7 +187,7 @@ export function Showroom() {
         >
           <Link href={"/show-room"}>
           <button className='px-10 py-4 rounded-full transition-all duration-300 hover:shadow-xl border-2 border-greenDeep text-greenDeep font-medium'>
-            Ko'proq ko'rsatish
+            {"Ko'proq ko'rsatish"}
           </button>
           </Link>
         </motion.div>
