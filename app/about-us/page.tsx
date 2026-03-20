@@ -1,7 +1,9 @@
 "use client";
 import { motion } from "motion/react";
-import { ImageWithFallback } from "./ui/ImageWithFallBack";
+import { ImageWithFallback } from "@/components/ui/ImageWithFallBack";
 import { Target, Heart, Lightbulb, Users2 } from "lucide-react";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 const values = [
   {
@@ -30,9 +32,15 @@ const values = [
   },
 ];
 
-export function AboutUs() {
+export default function AboutUs() {
   return (
-    <div className='relative w-full py-24 lg:py-32 overflow-hidden bg-greenDeep'>
+    <>
+      <main className="relative min-h-screen overflow-hidden">
+        <div className="pointer-events-none absolute left-0 top-32 h-72 w-72 rounded-full bg-goldAccent/20 blur-3xl" />
+        <div className="pointer-events-none absolute right-0 top-64 h-96 w-96 rounded-full bg-greenDeep/10 blur-3xl" />
+
+          <Navbar />
+    <div id="biz-haqimizda" className='relative w-full py-24 lg:py-32 overflow-hidden bg-greenDeep'>
       <div className='absolute inset-0 opacity-20'>
         <div
           className='absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full blur-[120px]'
@@ -306,5 +314,8 @@ export function AboutUs() {
         </motion.div>
       </div>
     </div>
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -10,7 +10,7 @@ const LINE2 = ["va", "nafis", "qiling"];
 
 export function Hero() {
   useEffect(() => {
-    // ── Badge elastic pop ──────────────────────────────────────────────────
+    // ── Badge elastic pop ─────────────────────────────────────────────────
     animate("#hero-badge", {
       scale: [0.55, 1],
       opacity: [0, 1],

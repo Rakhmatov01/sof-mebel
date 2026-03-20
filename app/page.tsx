@@ -2,9 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Footer } from "@/components/Footer";
 import { Collections } from "@/components/Collections";
-import { WhyUs } from "@/components/WhyUs";
 import { Showroom } from "@/components/Showroom";
-import { AboutUs } from "@/components/AboutUs";
 
 export default function HomePage() {
   return (
@@ -16,11 +14,8 @@ export default function HomePage() {
           <Navbar />
           <Hero />
         </div>
-
         <Collections />
-        <WhyUs />
         <Showroom />
-        <AboutUs />
       </main>
       <Footer />
     </>

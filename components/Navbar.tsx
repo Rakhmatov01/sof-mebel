@@ -3,18 +3,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navItems = [
-  { label: "Bosh sahifa", href: "/#bosh-sahifa" },
-  { label: "Mebel", href: "/#mebel" },
-  { label: "Aksessuarlar", href: "/#aksessuarlar" },
+  { label: "Bosh sahifa", href: "/" },
+  { label: "Biz haqimizda", href: "/about-us" },
+  { label: "Show Room", href: "/show-room" },
   { label: "Online Magazine", href: "/online-magazine" },
-  { label: "Biz haqimizda", href: "/#biz-haqimizda" },
+  { label: "Contact us", href: "/contact-us" },
 ];
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
     let prevScrollY = window.scrollY;
@@ -65,16 +67,19 @@ export function Navbar() {
         </Link>
 
         <nav className='hidden items-center gap-10 text-[15px] font-medium tracking-wide text-white/90 md:flex'>
-          {navItems.map(item => (
-            <a
+          {navItems.map(item => {
+            const isActive = pathname === item.href;
+            return <a
               key={item.label}
               href={item.href}
-              className='relative transition-colors duration-300 hover:text-goldAccent group'
+              className={`relative transition-colors duration-300 hover:text-goldAccent group ${isActive && 
+                "text-goldAccent"
+              }`}
             >
               {item.label}
               <span className='absolute -bottom-1 left-0 w-0 h-[1px] bg-goldAccent transition-all duration-300 group-hover:w-full' />
             </a>
-          ))}
+                })}
         </nav>
 
         <div className='flex items-center gap-4 md:hidden'>

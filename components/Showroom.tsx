@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { ImageWithFallback } from "./ui/ImageWithFallBack";
 import { useState } from "react";
 import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+
 
 const galleryImages = [
   {
@@ -129,7 +131,7 @@ export function Showroom() {
             kolleksiyalarimizni chiroyli bezatilgan makonlarda his eting.
           </motion.p>
         </div>
-
+        <div className="w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -176,6 +178,20 @@ export function Showroom() {
             </motion.div>
           ))}
         </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className='text-center mb-16'
+        >
+          <Link href={"/show-room"}>
+          <button className='px-10 py-4 rounded-full transition-all duration-300 hover:shadow-xl border-2 border-greenDeep text-greenDeep font-medium'>
+            Ko'proq ko'rsatish
+          </button>
+          </Link>
+        </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
