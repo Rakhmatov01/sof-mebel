@@ -171,9 +171,12 @@ export function Collections() {
                     y: hoveredId === item.id ? 0 : 10,
                   }}
                   transition={{ duration: 0.3 }}
-                  className='absolute bottom-0 left-0 p-5'
+                  className='absolute w-full bottom-0 flex justify-between items-center p-3'
                 >
-                  <span className='font-medium text-white'>{item.name}</span>
+                  <span className='text-white'>{item.name}</span>
+                  <button className="rounded-full px-6 py-3 bg-goldAccent/95 text-greenDeep flex items-center gap-2 font-medium" >
+                  <span> Ko&apos;rish</span> <ArrowRight className='w-4 h-4' /></button>
+                  
                 </motion.div>
               </div>
             </motion.div>
@@ -183,3 +186,4 @@ export function Collections() {
     </div>
   );
 }
+
