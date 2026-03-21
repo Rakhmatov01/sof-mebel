@@ -164,18 +164,17 @@ export function Collections() {
                   </span>
                 </div>
 
-                <motion.button
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{
                     opacity: hoveredId === item.id ? 1 : 0,
                     y: hoveredId === item.id ? 0 : 10,
                   }}
                   transition={{ duration: 0.3 }}
-                  className='absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full backdrop-blur-md flex items-center gap-2 bg-goldAccent/95 text-greenDeep'
+                  className='absolute bottom-0 left-0 p-5'
                 >
-                  <span className='font-medium'>Ko&apos;rish</span>
-                  <ArrowRight className='w-4 h-4' />
-                </motion.button>
+                  <span className='font-medium text-white'>{item.name}</span>
+                </motion.div>
               </div>
             </motion.div>
           ))}
