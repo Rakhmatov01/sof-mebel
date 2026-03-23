@@ -1,7 +1,8 @@
 "use client";
 import { motion } from "motion/react";
 import { ImageWithFallback } from "./ui/ImageWithFallBack";
-import { ArrowRight, Star } from "lucide-react";
+import Link from "next/link";
+
 import { useState } from "react";
 
 const collections = [
@@ -135,34 +136,30 @@ export function Collections() {
               onMouseLeave={() => setHoveredId(null)}
               className='group relative'
             >
+
               <div className='relative rounded-3xl overflow-hidden mb-6'
               style={{aspectRatio : item.imageRatio}}>
-                <motion.div
+                <motion.button
                   animate={{
                     scale: hoveredId === item.id ? 1.05 : 1,
                   }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   className='w-full h-full'
-                >
+                  >
                   <ImageWithFallback
                     src={item.image}
                     alt={item.name}
                     className='w-full h-full object-cover'
-                  />
-                </motion.div>
+                    />
+                </motion.button>
 
+                    <Link href="/online-magazine">
                 <div
                   className={`absolute inset-0 transition-opacity duration-300 bg-gradient-to-t from-greenDeep/80 via-transparent to-transparent ${
                     hoveredId === item.id ? "opacity-100" : "opacity-70"
                   }`}
                 />
-
-                <div className='absolute top-4 right-4 px-3 py-2 rounded-full backdrop-blur-md flex items-center gap-2 bg-goldAccent/90'>
-                  <Star className='w-4 h-4 fill-greenDeep text-greenDeep' />
-                  <span className='text-sm text-greenDeep font-medium'>
-                    {item.rating}
-                  </span>
-                </div>
+                    </Link>
 
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -173,10 +170,7 @@ export function Collections() {
                   transition={{ duration: 0.3 }}
                   className='absolute w-full bottom-0 flex justify-between items-center p-3'
                 >
-                  <span className='text-white'>{item.name}</span>
-                  <button className="rounded-full px-6 py-3 bg-goldAccent/95 text-greenDeep flex items-center gap-2 font-medium" >
-                  <span> Ko&apos;rish</span> <ArrowRight className='w-4 h-4' /></button>
-                  
+                  <span className='text-white'>{item.name}</span>                  
                 </motion.div>
               </div>
             </motion.div>
