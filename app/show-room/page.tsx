@@ -2,7 +2,7 @@
 
 import { Navbar } from '@/components/Navbar';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallBack';
-import { X, ChevronLeft, ChevronRight, Link, ZoomIn } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from 'react';
 
@@ -170,17 +170,6 @@ const galleryImages = [
     height: "h-[350px]",
 
   },
-];
-
-const cardHeights = [
-  ,
-  "h-[460px]",
-  "h-[600px]",
-  "h-[520px]",
-  "h-[500px]",
-  "h-[480px]",
-  "h-[640px]",
-  "h-[590px]",
 ];
 
 
