@@ -12,8 +12,6 @@ import {
   ShoppingCart,
   User,
   Store,
-  Minus,
-  Plus,
 } from "lucide-react";
 
 const products = [
