@@ -174,7 +174,6 @@ function MobileBottomNav() {
 
 export default function OnlineMagazinePage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [quantities, setQuantities] = useState<Record<number, number>>({});
 
   const categories = [
     "All",
@@ -185,24 +184,6 @@ export default function OnlineMagazinePage() {
     selectedCategory === "All"
       ? products
       : products.filter((product) => product.category === selectedCategory);
-
-  const handleQuantityChange = (id: number, type: "inc" | "dec") => {
-    setQuantities((prev) => {
-      const current = prev[id] ?? 1;
-
-      if (type === "dec") {
-        return {
-          ...prev,
-          [id]: Math.max(1, current - 1),
-        };
-      }
-
-      return {
-        ...prev,
-        [id]: current + 1,
-      };
-    });
-  };
 
   return (
     <>

@@ -19,7 +19,7 @@ export default function DesktopTopActions() {
 
   return (
     <div className="hidden md:flex items-center justify-end gap-3 px-6 pt-20 lg:px-8">
-      {items.map((item, index) => {
+      {items.map((item) => {
         const Icon = item.icon;
         return (
           <Link
