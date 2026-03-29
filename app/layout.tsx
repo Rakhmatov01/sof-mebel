@@ -5,6 +5,7 @@ import {
   Instrument_Serif,
 } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
+import QueryProvider from "@/providers/QueryProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -62,7 +63,9 @@ export default function RootLayout({
           zIndex={1600}
           showAtBottom={false}
         />
-        {children}
+        <QueryProvider>
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );
