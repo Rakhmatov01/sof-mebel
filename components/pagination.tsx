@@ -59,10 +59,10 @@ export default function Pagination({
           <button
             key={page}
             onClick={() => onPageChange(Number(page))}
-            className={`flex h-10 min-w-[40px] items-center justify-center rounded-full px-3 text-sm font-medium transition ${
+            className={`flex h-10 min-w-[40px] items-center justify-center rounded-full px-3 text-sm font-bold transition-all duration-300 ${
               currentPage === page
-                ? "bg-black text-white"
-                : "border border-neutral-300 bg-white text-neutral-700 hover:bg-neutral-100"
+                ? "bg-greenDeep text-white shadow-lg shadow-greenDeep/20"
+                : "border border-neutral-200 bg-white text-neutral-600 hover:border-goldAccent hover:text-goldAccent"
             }`}
           >
             {page}

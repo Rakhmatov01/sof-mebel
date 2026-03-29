@@ -117,6 +117,14 @@ body {
   .soft-ring {
     box-shadow: 0 8px 30px rgba(31, 61, 43, 0.22);
   }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* ---------- Reduced-motion safety ---------- */

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Store, ShoppingCart, User, Search, Menu, X } from "lucide-react";
+import { useCartStore } from "@/store/useCartStore";
 
 const navItems = [
   { label: "Bosh sahifa", href: "/" },
@@ -18,6 +19,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const pathname = usePathname();
+  const cartCount = useCartStore((state) => state.totalItems());
 
   useEffect(() => {
     let prevScrollY = window.scrollY;
@@ -96,6 +98,8 @@ export function Navbar() {
             {actionItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
+              const isCart = item.label === "Savat";
+              
               return (
                 <Link
                   key={item.label}
@@ -107,8 +111,13 @@ export function Navbar() {
                   title={item.label}
                 >
                   <Icon size={20} className="transition-transform group-hover:scale-110" />
-                  {item.label === "Savat" && (
-                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-goldAccent rounded-full border border-greenDeep shadow-sm group-hover:scale-125 transition-transform" />
+                  {isCart && cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-goldAccent text-[10px] font-bold text-greenDeep shadow-sm group-hover:scale-110 transition-transform">
+                      {cartCount}
+                    </span>
+                  )}
+                  {isCart && cartCount === 0 && (
+                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-white/20 rounded-full border border-greenDeep shadow-sm group-hover:scale-125 transition-transform" />
                   )}
                 </Link>
               );
@@ -123,7 +132,11 @@ export function Navbar() {
               className="p-2 text-white/70 hover:text-white relative"
             >
               <ShoppingCart size={22} />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-goldAccent rounded-full" />
+              {cartCount > 0 && (
+                <span className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-goldAccent text-[10px] font-bold text-greenDeep">
+                  {cartCount}
+                </span>
+              )}
             </Link>
 
             <button
