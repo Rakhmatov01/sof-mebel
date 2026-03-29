@@ -59,7 +59,7 @@ export function Navbar() {
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className='fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-greenDeep/80 border-b border-white/5'
     >
-      <div className='mx-auto flex w-full max-w-[1400px] items-center justify-between px-6 py-4 lg:px-12'>
+      <div className='container-custom flex items-center justify-between py-4'>
         <Link href='/'>
           <div className='text-2xl lg:text-3xl font-semibold tracking-tight text-white font-brand'>
             <span className='font-brand text-goldAccent'>Sof</span> Mebel

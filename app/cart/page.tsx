@@ -53,9 +53,7 @@ function MobileTopBar() {
 function MobileBottomNav() {
   const items = [
     { label: "Do‘kon", icon: Store, active: false, href: "/online-magazine" },
-    { label: "Qidiruv", icon: Search, active: false, href: "/online-magazine" },
     { label: "Savat", icon: ShoppingCart, active: true, href: "/cart" },
-    { label: "Profil", icon: User, active: false, href: "/online-magazine" },
   ];
 
   return (
@@ -68,11 +66,10 @@ function MobileBottomNav() {
             <Link
               key={item.label}
               href={item.href}
-              className={`flex min-w-[72px] flex-col items-center justify-center rounded-full px-4 py-2 transition ${
-                item.active
+              className={`flex min-w-[72px] flex-col items-center justify-center rounded-full px-4 py-2 transition ${item.active
                   ? "bg-[#203b28] text-white"
                   : "text-[#7a6a49] hover:text-[#203b28]"
-              }`}
+                }`}
             >
               <Icon size={20} />
               <span className="mt-1 text-[10px] font-medium tracking-[0.18em]">
@@ -331,19 +328,19 @@ export default function CartPage() {
                           placeholder="Telefon raqami"
                           value={phone}
                           onChange={(e) => {
-                          let value = e.target.value;
-                          if (!value.startsWith("+998")) {
-                            value = "+998" + value.replace(/^\+?998?/, "");
-                          }
-                          value = value.replace(/[^\d+]/g, "");
-                          if (!value.startsWith("+998")) {
-                            value = "+998";
-                          }
-                          if (value.length > 13) {
-                            value = value.slice(0, 13);
-                          }
-                          setPhone(value);
-                        }}
+                            let value = e.target.value;
+                            if (!value.startsWith("+998")) {
+                              value = "+998" + value.replace(/^\+?998?/, "");
+                            }
+                            value = value.replace(/[^\d+]/g, "");
+                            if (!value.startsWith("+998")) {
+                              value = "+998";
+                            }
+                            if (value.length > 13) {
+                              value = value.slice(0, 13);
+                            }
+                            setPhone(value);
+                          }}
                           className="w-full rounded-2xl border border-[#d7d0c3] bg-white px-4 py-3 outline-none placeholder:text-[#8b867e] focus:border-[#203b28]"
                         />
 

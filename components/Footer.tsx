@@ -25,7 +25,7 @@ export function Footer() {
         />
       </div>
 
-      <div className='relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12'>
+      <div className='relative z-10 container-custom'>
 
         <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16'>
           <motion.div

@@ -91,6 +91,22 @@ body {
 
 /* ---------- Glass / ring utilities ---------- */
 @layer utilities {
+  .container-custom {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem !important; /* px-6 */
+    padding-right: 1.5rem !important; /* px-6 */
+  }
+
+  @media (min-width: 1024px) {
+    .container-custom {
+      padding-left: 3rem !important; /* lg:px-12 */
+      padding-right: 3rem !important; /* lg:px-12 */
+    }
+  }
+
   .glass-card {
     background: rgba(245, 242, 235, 0.16);
     backdrop-filter: blur(14px);

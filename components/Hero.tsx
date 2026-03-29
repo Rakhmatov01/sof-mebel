@@ -49,9 +49,9 @@ export function Hero() {
 
     // ── Stats count-up ─────────────────────────────────────────────────────
     const statData: { selector: string; end: number; fmt: (v: number) => string }[] = [
-      { selector: "#stat-val-0", end: 500,  fmt: v => `${Math.floor(v)}+` },
-      { selector: "#stat-val-1", end: 50,   fmt: v => `${Math.floor(v)}K+` },
-      { selector: "#stat-val-2", end: 25,   fmt: v => `${Math.floor(v)}+` },
+      { selector: "#stat-val-0", end: 500, fmt: v => `${Math.floor(v)}+` },
+      { selector: "#stat-val-1", end: 50, fmt: v => `${Math.floor(v)}K+` },
+      { selector: "#stat-val-2", end: 25, fmt: v => `${Math.floor(v)}+` },
     ];
     statData.forEach(({ selector, end, fmt }, i) => {
       const el = document.querySelector(selector);
@@ -131,7 +131,7 @@ export function Hero() {
       />
 
       {/* ── Content ──────────────────────────────────────────────────────── */}
-      <div className='relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 lg:pt-24 pb-16'>
+      <div className='relative z-10 container-custom pt-28 lg:pt-24 pb-16'>
         <div className='grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-8rem)]'>
 
           {/* Left column */}
@@ -243,7 +243,7 @@ export function Hero() {
               className='absolute top-0 right-0 w-[85%] lg:w-[70%] h-[60%] lg:h-[65%] rounded-2xl lg:rounded-4xl overflow-hidden shadow-2xl border border-goldAccent/20 gpu'
             >
               <ImageWithFallback
-                src='https://images.unsplash.com/photo-1762803841422-5b8cf8767cd9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBtb2Rlcm4lMjBmdXJuaXR1cmUlMjBzb2ZhfGVufDF8fHx8MTc3MTg0OTMxOXww&ixlib=rb-4.1.0&q=80&w=1080'
+                src='/images/hero_1.webp'
                 alt='Luxury modern sofa'
                 className='w-full h-full object-cover'
               />
@@ -257,7 +257,7 @@ export function Hero() {
               className='absolute bottom-0 left-0 w-[60%] lg:w-[55%] h-[45%] lg:h-[50%] rounded-2xl lg:rounded-4xl overflow-hidden shadow-2xl border border-goldAccent/20 z-10 gpu'
             >
               <ImageWithFallback
-                src='https://images.unsplash.com/photo-1760611656233-915efdf138b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwbHV4dXJ5JTIwY2hhaXIlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzE4NDkzMTl8MA&ixlib=rb-4.1.0&q=80&w=1080'
+                src='/images/hero_2.webp'
                 alt='Minimalist luxury chair'
                 className='w-full h-full object-cover'
               />

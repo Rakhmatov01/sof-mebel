@@ -141,9 +141,7 @@ function MobileTopBar() {
 function MobileBottomNav() {
   const items = [
     { label: "Do‘kon", icon: Store, active: true, href: "/online-magazine" },
-    { label: "Qidiruv", icon: Search, active: false, href: "/online-magazine" },
     { label: "Savat", icon: ShoppingCart, active: false, href: "/cart" },
-    { label: "Profil", icon: User, active: false, href: "/online-magazine" },
   ];
 
   return (
@@ -157,8 +155,8 @@ function MobileBottomNav() {
               key={item.label}
               href={item.href}
               className={`flex min-w-[72px] flex-col items-center justify-center rounded-full px-4 py-2 transition ${item.active
-                  ? "bg-[#203b28] text-white"
-                  : "text-[#7a6a49] hover:text-[#203b28]"
+                ? "bg-[#203b28] text-white"
+                : "text-[#7a6a49] hover:text-[#203b28]"
                 }`}
             >
               <Icon size={20} />
@@ -227,7 +225,6 @@ export default function OnlineMagazinePage() {
         setTotalPages(1);
       } finally {
         setLoadingProducts(false);
-        console.log(selectedCategory);
       }
     };
 
@@ -246,10 +243,7 @@ export default function OnlineMagazinePage() {
 
   const getImageUrl = (images?: string) => {
     if (!images) return "/placeholder.png";
-    console.log("images->", images);
-
     const firstImage = images[0]?.trim();
-
     if (!firstImage) return "/placeholder.png";
 
     if (
@@ -265,9 +259,11 @@ export default function OnlineMagazinePage() {
 
   return (
     <>
-      <main className="relative min-h-screen overflow-hidden bg-greenDeep pb-28 md:pb-0">
+      <main className="relative min-h-screen overflow-hidden bg-greenDeep pb-32 md:pb-0">
+        <Navbar />
         <MobileTopBar />
 
+        {/* Ambient background decorative elements */}
         <div className="absolute inset-0 pointer-events-none opacity-25">
           <div
             className="absolute right-0 top-0 h-[560px] w-[560px] rounded-full blur-[70px]"
@@ -282,7 +278,6 @@ export default function OnlineMagazinePage() {
             }}
           />
         </div>
-
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.025]"
           style={{
@@ -292,52 +287,51 @@ export default function OnlineMagazinePage() {
           }}
         />
 
-        <div className="relative mx-auto w-full max-w-[1600px] md:pt-5">
-          <div className="hidden md:block">
-            <Navbar />
-          </div>
+        <div className="relative">
+          <div className="container-custom">
+            <DesktopTopActions />
 
-          <DesktopTopActions />
+            {/* Header Content Section - Aligned via container-custom */}
+            <section className="mb-8 mt-20 rounded-[28px] py-4 md:mb-12 md:mt-24 md:py-10">
+              <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                <div className="max-w-2xl">
+                  <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.2em] text-goldAccent md:text-lg md:font-medium md:tracking-[0.18em] md:text-white">
+                    Onlayn Magazin
+                  </p>
 
-          <section className=" mb-8 hidden overflow-hidden rounded-[28px] px-6 py-8 md:block md:px-10 md:py-10">
-            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div className="max-w-2xl">
-                <p className="mb-2 text-lg font-medium uppercase tracking-[0.18em] text-white">
-                  Onlayn Magazin
-                </p>
+                  <h1 className="text-2xl font-semibold leading-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                    Uyingiz uchun mos mebellarni qulay tanlang
+                  </h1>
 
-                <h1 className="text-3xl font-semibold leading-tight text-white md:text-4xl">
-                  Uyingiz uchun mos mebellarni qulay tanlang
-                </h1>
+                  <p className="mt-4 text-sm leading-7 text-gray-300 md:mt-6 md:text-base md:leading-8">
+                    Zamonaviy, nafis va funksional mebellarni bir sahifada ko‘rib,
+                    interyeringizga mos variantlarni toping.
+                  </p>
+                </div>
 
-                <p className="mt-3 text-sm leading-7 text-gray-300 md:text-base">
-                  Zamonaviy, nafis va funksional mebellarni bir sahifada ko‘rib,
-                  interyeringizga mos variantlarni toping.
-                </p>
+                <div className="flex flex-wrap gap-2 text-[10px] text-[#203b28] md:gap-3 md:text-sm md:text-[#7b746b]">
+                  <span className="rounded-full bg-white/70 px-4 py-2 font-medium md:bg-white/80">
+                    Premium
+                  </span>
+                  <span className="rounded-full bg-white/70 px-4 py-2 font-medium md:bg-white/80">
+                    Zamonaviy
+                  </span>
+                  <span className="rounded-full bg-white/70 px-4 py-2 font-medium md:bg-white/80">
+                    Nafis
+                  </span>
+                </div>
               </div>
+            </section>
 
-              <div className="flex gap-3 text-sm text-[#7b746b]">
-                <span className="rounded-full bg-white/70 px-4 py-2">
-                  Premium
-                </span>
-                <span className="rounded-full bg-white/70 px-4 py-2">
-                  Zamonaviy
-                </span>
-                <span className="rounded-full bg-white/70 px-4 py-2">
-                  Nafis
-                </span>
-              </div>
-            </div>
-          </section>
-
-          <section className="mb-8 mt-2 px-4 md:mt-20 md:px-6 lg:px-8">
-            <div className="mx-auto max-w-7xl">
-              <div className="-mx-4 overflow-x-auto px-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                <div className="flex w-max gap-3">
+            {/* Categories Section - Aligned via container-custom */}
+            <section className="relative mb-12">
+              {/* Category list needs to be able to scroll to the edge on mobile, but align with container on desktop */}
+              <div className="-mx-6 overflow-x-auto px-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden lg:-mx-12 lg:px-12">
+                <div className="flex w-max gap-3 py-2">
                   {loadingCategories ? (
-                    <p className="text-sm text-white">Kategoriyalar yuklanmoqda...</p>
+                    <p className="text-sm text-white/60">Kategoriyalar yuklanmoqda...</p>
                   ) : categoriesError ? (
-                    <p className="text-sm text-red-300">{categoriesError}</p>
+                    <p className="text-sm text-red-300/80">{categoriesError}</p>
                   ) : (
                     categoryTabs.map((category) => {
                       const isActive = selectedCategory === category.value;
@@ -349,9 +343,9 @@ export default function OnlineMagazinePage() {
                             setSelectedCategory(category.value);
                             setCurrentPage(1);
                           }}
-                          className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition ${isActive
-                              ? "bg-white text-[#0f172a]"
-                              : "bg-white/10 text-white hover:bg-white/15"
+                          className={`whitespace-nowrap rounded-full px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all md:text-sm ${isActive
+                            ? "bg-white text-greenDeep shadow-soft"
+                            : "bg-white/10 text-white hover:bg-white/20"
                             }`}
                         >
                           {category.label}
@@ -361,82 +355,99 @@ export default function OnlineMagazinePage() {
                   )}
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
 
-          <section className="mt-10 w-full bg-[#f5f5f5] px-4 py-8 md:px-6 lg:px-8">
-            <div className="mx-auto max-w-7xl">
-              <h2 className="mb-6 text-2xl font-semibold text-neutral-900">
-                Mahsulotlar
-              </h2>
+          {/* Products Section - Full background with centered inner container */}
+          <section className="relative mt-4 bg-[#f8f7f2] py-12">
+            {/* Top rounded corner effect to transition from dark to light */}
+            <div className="absolute -top-8 left-0 right-0 h-16 rounded-[40px] bg-[#f8f7f2]" />
+
+            <div className="container-custom">
+              <div className="mb-10 flex items-center justify-between">
+                <h2 className="text-xl font-semibold tracking-tight text-neutral-900 md:text-3xl">
+                  Mahsulotlar
+                </h2>
+                <div className="h-0.5 flex-1 mx-6 bg-neutral-200 hidden sm:block opacity-20" />
+                <p className="text-sm font-medium text-neutral-500">
+                  {products.length} ta natija
+                </p>
+              </div>
 
               {loadingProducts ? (
-                <p className="text-sm text-neutral-500">Mahsulotlar yuklanmoqda...</p>
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="h-96 animate-pulse rounded-3xl bg-neutral-200" />
+                  ))}
+                </div>
               ) : productsError ? (
-                <p className="text-sm text-red-500">{productsError}</p>
+                <div className="rounded-2xl border border-red-100 bg-red-50 p-6 text-center">
+                  <p className="text-sm text-red-600 font-medium">{productsError}</p>
+                </div>
               ) : products.length === 0 ? (
-                <p className="text-sm text-neutral-500">
-                  Hozircha mahsulot topilmadi.
-                </p>
+                <div className="rounded-2xl border border-neutral-100 bg-white p-12 text-center shadow-sm">
+                  <Store className="mx-auto mb-4 text-neutral-300" size={48} />
+                  <p className="text-neutral-500 font-medium">Hozircha mahsulot topilmadi.</p>
+                </div>
               ) : (
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
                   {products.map((product) => (
                     <div
                       key={product.id}
-                      className="mb-5 break-inside-avoid rounded-[24px] bg-white p-0 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                      className="group relative flex flex-col rounded-[24px] bg-white p-2 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                     >
-                      <div className="w-full overflow-hidden rounded-[22px] rounded-b h-[400px]">
+                      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[20px]">
                         <img
                           src={getImageUrl(product.images)}
                           alt={product.name}
-                          className="h-full w-full overflow-hidden object-cover"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
+                        <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/5" />
+                        <Link
+                          href={`/product-detail/${product.slug}`}
+                          className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                        >
+                          <div className="flex w-full items-center justify-center rounded-xl bg-white/95 backdrop-blur-md px-4 py-3 text-xs font-bold uppercase tracking-widest text-greenDeep">
+                            Sotib olish
+                          </div>
+                        </Link>
                       </div>
 
-                      <div className="p-4">
-                        <div className="mb-2 flex items-start justify-between gap-3">
-                          <div>
-                            <p className="text-sm text-neutral-500">Sof Mebel</p>
-                            <p className="text-xs text-neutral-400">
+                      <div className="px-3 pb-3 pt-4">
+                        <div className="mb-2 flex items-start justify-between">
+                          <div className="flex-1 overflow-hidden">
+                            <h3 className="truncate text-sm font-semibold text-neutral-900 md:text-lg">
+                              {product.name}
+                            </h3>
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 md:text-xs">
                               {
                                 categories.find(
                                   (category) => category.id === product.category
-                                )?.name
+                                )?.name || "Premium Mebel"
                               }
-                            </p>
-                          </div>
-
-                          <div className="text-right">
-                            <p className="text-sm text-neutral-600">
-                              {product.price} UZS
                             </p>
                           </div>
                         </div>
 
-                        <div className="flex items-end justify-between gap-3">
-                          <h3 className="max-w-[70%] text-[20px] font-medium leading-tight text-neutral-900">
-                            {product.name}
-                          </h3>
-
-                          <Link
-                            href={`/product-detail/${product.slug}`}
-                            className="rounded-full bg-[#111827] px-5 py-2 text-sm font-medium text-white transition hover:opacity-90"
-                          >
-                            O‘tish
-                          </Link>
+                        <div className="flex items-center justify-between mt-auto">
+                          <p className="text-sm font-bold text-greenDeep md:text-base">
+                            {Number(product.price).toLocaleString()} UZS
+                          </p>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               )}
-            </div>
 
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={(page: number) => setCurrentPage(page)}
-            />
+              <div className="mt-16">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={(page: number) => setCurrentPage(page)}
+                />
+              </div>
+            </div>
           </section>
         </div>
       </main>
