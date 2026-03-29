@@ -10,87 +10,87 @@ const collections = [
     id: 1,
     name: "Velvet Luxe",
     category: "Divanlar va Burchakli Divanlar",
-    price: "From $3,299",
+    price: "Narxi $3,299 dan boshlab",
     rating: 4.9,
     image:
       "https://images.unsplash.com/photo-1758448755778-90ebf4d0f1e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBjdXNoaW9uZWQlMjBzb2ZhJTIwYmVpZ2V8ZW58MXx8fHwxNzcxODUwNDcwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    description: "Sumptuous velvet upholstery with cloud-like comfort",
+    description: "Nafis ipak mato va osmonga o‘xshash qulaylik",
     imageRatio:"5 / 3"
   },
   {
     id: 2,
     name: "Aurora Collection",
     category: "Kreslolar",
-    price: "From $1,899",
+    price: "Narxi $1,899 dan boshlab",
     rating: 4.8,
     image:
       "https://images.unsplash.com/photo-1765663241884-ebd171bdda1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXNpZ25lciUyMHZlbHZldCUyMGFybWNoYWlyfGVufDF8fHx8MTc3MTg1MDQ3MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    description: "Statement pieces with sculptural elegance",
+    description: "Haykaltaroshlik nafisligi bilan ajralib turuvchi dizayn",
     imageRatio:"5 / 3"
   },
   {
     id: 3,
     name: "Meridian Series",
     category: "Dam Olish Kreslolari",
-    price: "From $4,599",
+    price: "Narxi $4,599 dan boshlab",
     rating: 5.0,
     image:
       "https://images.unsplash.com/photo-1759722665610-e13e59aa117b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzZWN0aW9uYWwlMjBjb3VjaHxlbnwxfHx8fDE3NzE4NTA0NzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    description: "Customizable configurations for modern living",
+    description: "Zamonaviy yashash uchun moslashtiriladigan konfiguratsiyalar",
     imageRatio:"5 / 4"
   },
   {
     id: 4,
     name: "Zenith Lounge",
     category: "Dam Olish Kreslolari",
-    price: "From $2,199",
+    price: "Narxi $2,199 dan boshlab",
     rating: 4.9,
     image:
       "https://images.unsplash.com/photo-1767050321604-a2654be8fad0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwbG91bmdlJTIwY2hhaXIlMjBjdXNoaW9ufGVufDF8fHx8MTc3MTg1MDQ3MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    description: "Perfect balance of form and relaxation",
+    description: "Shakl va dam olishning mukammal uyg‘unligi",
     imageRatio:"5 / 4"
   },
   {
     id: 5,
     name: "Imperial Chaise",
     category: "Dekorativ Kreslolar",
-    price: "From $2,799",
+    price: "Narxi $2,799 dan boshlab",
     rating: 4.7,
     image:
       "https://images.unsplash.com/photo-1768573264026-b540abdc3384?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwY2hhaXNlJTIwbG9uZ3VlfGVufDF8fHx8MTc3MTg1MDQ3MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    description: "Timeless elegance meets contemporary design",
+    description: "Uzoq muddatli nafislik va zamonaviy dizayn uyg‘unligi",
     imageRatio:"5 / 4"
   },
   {
     id: 6,
     name: "Signature Series",
     category: "Dekorativ Kreslolar",
-    price: "From $1,599",
+    price: "Narxi $1,599 dan boshlab",
     rating: 4.8,
     image:
       "https://images.unsplash.com/photo-1759264244744-4b0077534bfd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBhY2NlbnQlMjBjaGFpciUyMGludGVyaW9yfGVufDF8fHx8MTc3MTg1MDQ3MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    description: "Bold designs that command attention",
+    description: "Diqqatni o‘ziga tortuvchi jasur dizaynlar",
     imageRatio:"5 / 4"
   }, {
     id: 7,
     name: "Velvet Luxe",
     category: "Divanlar va Burchakli Divanlar",
-    price: "From $3,299",
+    price: "Narxi $3,299 dan boshlab",
     rating: 4.9,
     image:
       "https://images.unsplash.com/photo-1758448755778-90ebf4d0f1e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBjdXNoaW9uZWQlMjBzb2ZhJTIwYmVpZ2V8ZW58MXx8fHwxNzcxODUwNDcwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    description: "Sumptuous velvet upholstery with cloud-like comfort",
+    description: "Nafis ipak mato va osmonga o‘xshash qulaylik",
     imageRatio:"5 / 3"
   },
   {
     id: 8,
     name: "Aurora Collection",
     category: "Kreslolar",
-    price: "From $1,899",
+    price: "Narxi $1,899 dan boshlab",
     rating: 4.8,
     image:
       "https://images.unsplash.com/photo-1765663241884-ebd171bdda1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXNpZ25lciUyMHZlbHZldCUyMGFybWNoYWlyfGVufDF8fHx8MTc3MTg1MDQ3MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    description: "Statement pieces with sculptural elegance",
+    description: "Haykaltaroshlik nafisligi bilan ajralib turuvchi dizayn",
     imageRatio:"5 / 3"
   },
 ];

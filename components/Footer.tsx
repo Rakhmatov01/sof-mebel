@@ -83,7 +83,7 @@ export function Footer() {
                 "Eng Sotilganlar",
                 "Buyurtma bo'yicha",
                 "Dizayn Xizmatlari",
-                "Care & Maintenance",
+                "Parvarishlash va xizmat",
               ].map(link => (
                 <li key={link}>
                   <a

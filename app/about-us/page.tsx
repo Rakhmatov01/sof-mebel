@@ -184,7 +184,7 @@ export default function AboutUs() {
             <div className='flex gap-4 pt-4'>
               <div className='p-4 rounded-xl bg-goldAccent/10 border border-goldAccent/20'>
                 <div className='text-2xl mb-1 text-goldAccent font-light'>
-                  100+
+                  30+
                 </div>
                 <div className='text-xs text-white/50'>
                   Usta san&apos;atkorlar
@@ -192,13 +192,13 @@ export default function AboutUs() {
               </div>
               <div className='p-4 rounded-xl bg-goldAccent/10 border border-goldAccent/20'>
                 <div className='text-2xl mb-1 text-goldAccent font-light'>
-                  15+
+                  2+
                 </div>
                 <div className='text-xs text-white/50'>Davlatlar</div>
               </div>
               <div className='p-4 rounded-xl bg-goldAccent/10 border border-goldAccent/20'>
                 <div className='text-2xl mb-1 text-goldAccent font-light'>
-                  50K+
+                  10k+
                 </div>
                 <div className='text-xs text-white/50'>Mamnun mijozlar</div>
               </div>

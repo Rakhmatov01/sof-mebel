@@ -9,7 +9,7 @@ import { useState } from 'react';
 const galleryImages = [
   {
     id: 1,
-    title: "Meyn",
+    title: "Mehmonxona",
     brand: "Asento",
     price: "9 000 000 UZS",
     oldPrice: null,
@@ -19,7 +19,7 @@ const galleryImages = [
   },
   {
     id: 2,
-    title: "Svetilnik",
+    title: "Stol lampasi",
     brand: "Cozy House",
     price: "2 392 000 UZS",
     oldPrice: null,
@@ -29,7 +29,7 @@ const galleryImages = [
   },
   {
     id: 3,
-    title: "Nastolnaya lampa",
+    title: "Stol lampasi",
     brand: "Cozy House",
     price: "1 095 000 UZS",
     oldPrice: null,
@@ -39,7 +39,7 @@ const galleryImages = [
   },
   {
     id: 4,
-    title: "Jurnalniy stolik",
+    title: "Jurnal stoli",
     brand: "Strong",
     price: "7 250 000 UZS",
     oldPrice: "7 855 000 UZS",
@@ -59,7 +59,7 @@ const galleryImages = [
   },
   {
     id: 6,
-    title: "Dekor lampa",
+    title: "Dekor lampasi",
     brand: "Glow Home",
     price: "980 000 UZS",
     oldPrice: null,
@@ -69,7 +69,7 @@ const galleryImages = [
     },
   {
     id: 7,
-    title: "Kreslo",
+    title: "O‘rindiq",
     brand: "Soft Line",
     price: "4 890 000 UZS",
     oldPrice: null,
@@ -89,7 +89,7 @@ const galleryImages = [
   },
     {
       id: 9,
-      title: "Torшер",
+      title: "Torsher",
       brand: "Lumen",
       price: "1 780 000 UZS",
       oldPrice: null,
@@ -99,7 +99,7 @@ const galleryImages = [
     },
   {
     id: 10,
-    title: "Konsol stol",
+    title: "Konsol stoli",
     brand: "Nordic",
     price: "5 750 000 UZS",
     oldPrice: null,
@@ -110,63 +110,63 @@ const galleryImages = [
    {
     id: 11,
     url: "https://images.unsplash.com/photo-1687180498602-5a1046defaa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBmdXJuaXR1cmUlMjBzaG93cm9vbSUyMGludGVyaW9yfGVufDF8fHx8MTc3MTg0MDAzOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Main Showroom",
-    category: "Interior",
+    title: "Asosiy Ko‘rgazma",
+    category: "Interyer",
     height: "h-[550px]",
   },
   {
     id: 12,
     url: "https://images.unsplash.com/photo-1766802981823-7952790a7eba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBmdXJuaXR1cmUlMjBzdG9yZSUyMGRpc3BsYXl8ZW58MXx8fHwxNzcxODUzMTY4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Display Area",
-    category: "Showcase",
+    title: "Namoyish maydoni",
+    category: "Ekspozitsiya",
     height: "h-[460px]",
 
   },
   {
     id: 13,
     url: "https://images.unsplash.com/photo-1707299231603-6c0a93e0f7fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwbGl2aW5nJTIwcm9vbSUyMGludGVyaW9yfGVufDF8fHx8MTc3MTc5MDExMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Living Room Setup",
-    category: "Display",
+    title: "Yashash xonasi",
+    category: "Ko‘rgazma",
     height: "h-[520px]",
 
   },
   {
     id: 14,
     url: "https://images.unsplash.com/photo-1768946131535-b90bad125f16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb250ZW1wb3JhcnklMjBiZWRyb29tJTIwZnVybml0dXJlfGVufDF8fHx8MTc3MTg0Njc1MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Bedroom Collection",
-    category: "Display",
+    title: "Yotoqxona kolleksiyasi",
+    category: "Ko‘rgazma",
     height: "h-[500px]",
 
   },
   {
     id: 15,
     url: "https://images.unsplash.com/photo-1766802981817-776406db6807?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXNpZ25lciUyMGZ1cm5pdHVyZSUyMGV4aGliaXRpb258ZW58MXx8fHwxNzcxODUzMTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Designer Exhibition",
-    category: "Featured",
+    title: "Dizayner ko‘rgazmasi",
+    category: "Tanlangan",
     height: "h-[480px]",
 
   },
   {
     id: 16,
     url: "https://images.unsplash.com/photo-1763231575952-98244918f99b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBkaW5pbmclMjByb29tJTIwc2V0dXB8ZW58MXx8fHwxNzcxODUzMTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Dining Experience",
-    category: "Display",
+    title: "Ovqat xonasi",
+    category: "Ko‘rgazma",
     height: "h-[640px]",
 
   },
   {
     id: 17,
     url: "https://images.unsplash.com/photo-1737233347389-24bc3f3fe3a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwaG9tZSUyMG9mZmljZSUyMGZ1cm5pdHVyZXxlbnwxfHx8fDE3NzE4NTMxNzB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Office Suite",
-    category: "Display",
+    title: "Ofis majmuasi",
+    category: "Ko‘rgazma",
     height: "h-[590px]",
 
   },
   {
     id: 18,
     url: "https://images.unsplash.com/photo-1759038086846-c97a8adfce98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsb3VuZ2UlMjBhcmVhJTIwaW50ZXJpb3J8ZW58MXx8fHwxNzcxODUzMTcwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Lounge Area",
-    category: "Display",
+    title: "Dam olish zonasi",
+    category: "Ko‘rgazma",
     height: "h-[350px]",
 
   },

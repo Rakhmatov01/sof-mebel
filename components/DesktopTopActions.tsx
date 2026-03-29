@@ -11,10 +11,10 @@ export default function DesktopTopActions() {
   const pathname = usePathname();
   const color = pathname==="/online-magazine"?"white":"black";
   const items = [
-    { label: "Shop", icon: Store, href:"/online-magazine"},
-    { label: "Search", icon: Search, href: "online-magazine"},
-    { label: "Cart", icon: ShoppingCart, href: "/cart"},
-    { label: "Profile", icon: User, href: "online-magazine" },
+    { label: "Do‘kon", icon: Store, href:"/online-magazine"},
+    { label: "Qidiruv", icon: Search, href: "online-magazine"},
+    { label: "Savat", icon: ShoppingCart, href: "/cart"},
+    { label: "Profil", icon: User, href: "online-magazine" },
   ];
 
   return (

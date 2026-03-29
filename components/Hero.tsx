@@ -144,7 +144,7 @@ export function Hero() {
             >
               <Sparkles className='w-4 h-4 text-goldAccent' />
               <span className='text-sm tracking-widest text-goldAccent font-sans uppercase'>
-                2026 Collection
+                2026 Kolleksiya
               </span>
             </div>
 

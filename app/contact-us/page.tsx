@@ -23,7 +23,7 @@ export default function ContactUsPage() {
           {/* Left */}
           <div className="flex flex-col justify-center">
             <div className="mb-5 inline-flex w-fit items-center rounded-full border border-goldAccent/30 bg-goldAccent/5 px-4 py-2 text-xs uppercase tracking-[0.22em] text-goldAccent">
-              Contact Us
+              Biz bilan bog‘laning
             </div>
 
             <h1 className="max-w-xl font-[var(--font-instrumental-serif)] text-5xl leading-tight text-white sm:text-6xl lg:text-7xl">
