@@ -1,390 +1,258 @@
 "use client";
 
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { listProducts } from "@/lib/api/sofmebelApi";
 import { Navbar } from '@/components/Navbar';
-import { ImageWithFallback } from '@/components/ui/ImageWithFallBack';
-import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
+import { Footer } from '@/components/Footer';
+import { Breadcrumb } from '@/components/Breadcrumb';
+import { ShowRoomCard } from '@/components/ShowRoomCard';
+import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from 'lucide-react';
 import { AnimatePresence, motion } from "motion/react";
-import { useState } from 'react';
-
-const galleryImages = [
-  {
-    id: 1,
-    title: "Mehmonxona",
-    brand: "Asento",
-    price: "9 000 000 UZS",
-    oldPrice: null,
-    url:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&auto=format&fit=crop&q=80",
-    height: "h-[520px]",
-  },
-  {
-    id: 2,
-    title: "Stol lampasi",
-    brand: "Cozy House",
-    price: "2 392 000 UZS",
-    oldPrice: null,
-    url:
-      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&auto=format&fit=crop&q=80",
-    height: "h-[430px]",
-  },
-  {
-    id: 3,
-    title: "Stol lampasi",
-    brand: "Cozy House",
-    price: "1 095 000 UZS",
-    oldPrice: null,
-    url:
-      "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=800&auto=format&fit=crop&q=80",
-    height: "h-[460px]",
-  },
-  {
-    id: 4,
-    title: "Jurnal stoli",
-    brand: "Strong",
-    price: "7 250 000 UZS",
-    oldPrice: "7 855 000 UZS",
-    url:
-    "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=800&auto=format&fit=crop&q=80",
-    height: "h-[500px]",
-  },
-  {
-    id: 5,
-    title: "Divan",
-    brand: "Maison",
-    price: "12 400 000 UZS",
-    oldPrice: null,
-    url:
-    "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&auto=format&fit=crop&q=80",
-    height: "h-[300px]",
-  },
-  {
-    id: 6,
-    title: "Dekor lampasi",
-    brand: "Glow Home",
-    price: "980 000 UZS",
-    oldPrice: null,
-    url:
-      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&auto=format&fit=crop&q=80",
-      height: "h-[510px]",
-    },
-  {
-    id: 7,
-    title: "O‘rindiq",
-    brand: "Soft Line",
-    price: "4 890 000 UZS",
-    oldPrice: null,
-    url:
-      "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=800&auto=format&fit=crop&q=80",
-    height: "h-[340px]",
-  },
-  {
-    id: 8,
-    title: "Komod",
-    brand: "Wood Art",
-    price: "6 300 000 UZS",
-    oldPrice: "6 950 000 UZS",
-    url:
-      "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&auto=format&fit=crop&q=80",
-    height: "h-[460px]",
-  },
-    {
-      id: 9,
-      title: "Torsher",
-      brand: "Lumen",
-      price: "1 780 000 UZS",
-      oldPrice: null,
-      url:
-        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&auto=format&fit=crop&q=80",
-      height: "h-[520px]",
-    },
-  {
-    id: 10,
-    title: "Konsol stoli",
-    brand: "Nordic",
-    price: "5 750 000 UZS",
-    oldPrice: null,
-    url:
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?w=800&auto=format&fit=crop&q=80",
-    height: "h-[390px]",
-  },
-   {
-    id: 11,
-    url: "https://images.unsplash.com/photo-1687180498602-5a1046defaa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBmdXJuaXR1cmUlMjBzaG93cm9vbSUyMGludGVyaW9yfGVufDF8fHx8MTc3MTg0MDAzOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Asosiy Ko‘rgazma",
-    category: "Interyer",
-    height: "h-[550px]",
-  },
-  {
-    id: 12,
-    url: "https://images.unsplash.com/photo-1766802981823-7952790a7eba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBmdXJuaXR1cmUlMjBzdG9yZSUyMGRpc3BsYXl8ZW58MXx8fHwxNzcxODUzMTY4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Namoyish maydoni",
-    category: "Ekspozitsiya",
-    height: "h-[460px]",
-
-  },
-  {
-    id: 13,
-    url: "https://images.unsplash.com/photo-1707299231603-6c0a93e0f7fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwbGl2aW5nJTIwcm9vbSUyMGludGVyaW9yfGVufDF8fHx8MTc3MTc5MDExMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Yashash xonasi",
-    category: "Ko‘rgazma",
-    height: "h-[520px]",
-
-  },
-  {
-    id: 14,
-    url: "https://images.unsplash.com/photo-1768946131535-b90bad125f16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb250ZW1wb3JhcnklMjBiZWRyb29tJTIwZnVybml0dXJlfGVufDF8fHx8MTc3MTg0Njc1MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Yotoqxona kolleksiyasi",
-    category: "Ko‘rgazma",
-    height: "h-[500px]",
-
-  },
-  {
-    id: 15,
-    url: "https://images.unsplash.com/photo-1766802981817-776406db6807?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXNpZ25lciUyMGZ1cm5pdHVyZSUyMGV4aGliaXRpb258ZW58MXx8fHwxNzcxODUzMTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Dizayner ko‘rgazmasi",
-    category: "Tanlangan",
-    height: "h-[480px]",
-
-  },
-  {
-    id: 16,
-    url: "https://images.unsplash.com/photo-1763231575952-98244918f99b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBkaW5pbmclMjByb29tJTIwc2V0dXB8ZW58MXx8fHwxNzcxODUzMTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Ovqat xonasi",
-    category: "Ko‘rgazma",
-    height: "h-[640px]",
-
-  },
-  {
-    id: 17,
-    url: "https://images.unsplash.com/photo-1737233347389-24bc3f3fe3a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwaG9tZSUyMG9mZmljZSUyMGZ1cm5pdHVyZXxlbnwxfHx8fDE3NzE4NTMxNzB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Ofis majmuasi",
-    category: "Ko‘rgazma",
-    height: "h-[590px]",
-
-  },
-  {
-    id: 18,
-    url: "https://images.unsplash.com/photo-1759038086846-c97a8adfce98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsb3VuZ2UlMjBhcmVhJTIwaW50ZXJpb3J8ZW58MXx8fHwxNzcxODUzMTcwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    title: "Dam olish zonasi",
-    category: "Ko‘rgazma",
-    height: "h-[350px]",
-
-  },
-];
-
 
 export default function ShowRoom() {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  
-    const handleNext = () => {
-      if (selectedImage !== null) {
-        setSelectedImage((selectedImage + 1) % galleryImages.length);
-      }
-    };
-  
-    const handlePrev = () => {
-      if (selectedImage !== null) {
-        setSelectedImage(
-          (selectedImage - 1 + galleryImages.length) % galleryImages.length
-        );
-      }
-    };
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const observerTarget = useRef<HTMLDivElement>(null);
+
+  // TanStack Infinite Query for Products
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+  } = useInfiniteQuery({
+    queryKey: ["showroom-infinite"],
+    queryFn: ({ pageParam = 1 }) => listProducts({ page: pageParam }),
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.next) return undefined;
+      // Extract page number from next URL
+      const url = new URL(lastPage.next);
+      return Number(url.searchParams.get("page"));
+    },
+    initialPageParam: 1,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const products = data?.pages.flatMap((page) => page.results) || [];
+
+  // Intersection Observer for Infinite Scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
+  const handleNext = useCallback(() => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((selectedImageIndex + 1) % products.length);
+    }
+  }, [selectedImageIndex, products.length]);
+
+  const handlePrev = useCallback(() => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(
+        (selectedImageIndex - 1 + products.length) % products.length
+      );
+    }
+  }, [selectedImageIndex, products.length]);
+
+  const getImageUrl = (images?: string) => {
+    if (!images) return "/placeholder.png";
+    const firstImage = images[0]?.trim();
+    if (!firstImage) return "/placeholder.png";
+
+    if (firstImage.startsWith("http://") || firstImage.startsWith("https://")) {
+      return firstImage;
+    }
+
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+    return `${baseUrl}${firstImage}`;
+  };
+
+  // Deterministic masonry heights based on ID
+  const heights = ["h-[250px]", "h-[350px]", "h-[450px]", "h-[300px]", "h-[400px]"];
+  const getMasonryHeight = (id: number) => heights[id % heights.length];
+
   return (
-    <main className="relative min-h-screen overflow-hidden flex flex-col">
-      <div className="pointer-events-none absolute left-0 top-32 h-72 w-72 rounded-full bg-goldAccent/20 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 top-64 h-96 w-96 rounded-full bg-greenDeep/10 blur-3xl" />
+    <main className="relative min-h-screen bg-[#faf9f0] text-greenDeep">
+      <Navbar />
 
-      <div className="relative mx-auto w-full max-w-[1600px] flex min-h-screen flex-col">
-        <Navbar />
+      <main className="container-custom pt-32 pb-24">
+        {/* Header Section */}
+        <div className="mb-16">
+          <Breadcrumb
+            items={[
+              { label: "Bosh sahifa", href: "/" },
+              { label: "Show Room", href: "/show-room" },
+            ]}
+          />
 
-        <div className="flex-1" />
-        <section className="relative w-full py-24 lg:py-32 bg-white">
-      <div className="absolute bottom-0 left-0 w-[700px] h-[700px] opacity-5 pointer-events-none">
-        <div
-          className="w-full h-full rounded-full blur-[100px]"
-          style={{
-            background: "radial-gradient(circle, #C6A969 0%, transparent 70%)",
-          }}
-        />
-      </div>
+          <div className="mt-12 text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="inline-block px-4 py-1.5 rounded-full mb-6 bg-goldAccent/10 border border-goldAccent/20 text-[10px] font-bold uppercase tracking-[0.2em] text-goldAccent"
+            >
+              Exclusively Curated
+            </motion.div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16 lg:mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-block px-4 py-2 rounded-full mb-6 bg-goldAccent/10 border border-goldAccent/30"
-          >
-            <span className="text-sm tracking-wide text-goldAccent">
-              Tashrif buyuring
-            </span>
-          </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="font-serif text-5xl font-bold tracking-tight text-greenDeep lg:text-7xl"
+            >
+              Ko‘rgazma <span className="text-goldAccent">Zalimiz</span>
+            </motion.h1>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl lg:text-5xl xl:text-6xl mb-6 tracking-tight font-serif text-greenDeep font-light -tracking-[0.02em]"
-          >
-            Bizning Hashamatli
-            <span className="block mt-2 text-goldAccent font-normal">
-              Ko‘rgazma Zalimiz
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg max-w-2xl mx-auto text-greenDeep/60"
-          >
-            Nafis hashamat olamiga qadam qo‘ying. Did bilan saralangan
-            kolleksiyalarimizni chiroyli bezatilgan makonlarda his eting.
-          </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="mt-6 max-w-2xl mx-auto text-lg text-neutral-600 leading-relaxed"
+            >
+              Nafis hashamat olamiga qadam qo‘ying. Siz uchun saralangan eng sara kolleksiyalar.
+            </motion.p>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 lg:gap-6 space-y-4 lg:space-y-6 mb-16"
-        >
-          {galleryImages.map((image, index) => (
-            <motion.div
-              key={image.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="break-inside-avoid mb-4 lg:mb-6"
-            >
-              <div
-                className="group relative overflow-hidden rounded-[24px] cursor-pointer"
-                onClick={() => setSelectedImage(index)}
+        {/* Gallery Grid - 2 columns on mobile */}
+        <div className="relative min-h-[400px]">
+          {isLoading && products.length === 0 ? (
+            <div className="flex h-64 items-center justify-center">
+              <Loader2 className="animate-spin text-goldAccent" size={32} />
+            </div>
+          ) : products.length > 0 ? (
+            <>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="columns-2 md:columns-3 xl:columns-4 gap-4 lg:gap-6 space-y-4 lg:space-y-6"
               >
-                <div className={`relative w-full ${image.height}`}>
-                  <ImageWithFallback
-                    src={image.url}
-                    alt={image.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                {products.map((product, index) => (
+                  <ShowRoomCard
+                    key={`${product.id}-${index}`}
+                    product={product}
+                    index={index}
+                    height={getMasonryHeight(product.id)}
+                    onClick={() => setSelectedImageIndex(index)}
                   />
+                ))}
+              </motion.div>
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition duration-300" />
-
-                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center bg-white/80 backdrop-blur-md opacity-0 group-hover:opacity-100 transition duration-300">
-                    <ZoomIn className="w-5 h-5 text-greenDeep" />
-                  </div>
-
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 className="text-white text-lg font-medium">
-                      {image.title}
-                    </h3>
-                  </div>
-                </div>
+              {/* Observer Target */}
+              <div ref={observerTarget} className="h-20 flex items-center justify-center mt-12">
+                {isFetchingNextPage && <Loader2 className="animate-spin text-goldAccent" size={24} />}
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            </>
+          ) : (
+            <div className="flex h-64 flex-col items-center justify-center rounded-[32px] bg-white border border-dashed border-neutral-200">
+              <p className="text-xl font-bold text-neutral-400">Hozircha ko‘rgazmalar mavjud emas.</p>
+            </div>
+          )}
+        </div>
+      </main>
 
-      </div>
+      <Footer />
 
+      {/* Lightbox Modal - Professional Refinement */}
       <AnimatePresence>
-        {selectedImage !== null && (
+        {selectedImageIndex !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-greenDeep/95"
-            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[110] flex items-center justify-center bg-greenDeep/95 backdrop-blur-2xl"
+            onClick={() => setSelectedImageIndex(null)}
           >
-            <button
-              className="absolute top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 bg-goldAccent/20 border border-goldAccent/40 text-goldAccent"
-              onClick={() => setSelectedImage(null)}
-            >
-              <X className="w-6 h-6" />
-            </button>
+            {/* Navigation Controls - Side Arrows */}
+            <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between items-center pointer-events-none z-[130]">
+              <button
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all bg-white/10 border border-white/20 text-white hover:bg-white active:bg-white active:text-greenDeep active:scale-95 pointer-events-auto backdrop-blur-xl group"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrev();
+                }}
+              >
+                <ChevronLeft size={28} className="sm:w-10 sm:h-10 transition-transform group-hover:-translate-x-1" />
+              </button>
 
-            <button
-              className="absolute left-6 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 bg-goldAccent/20 border border-goldAccent/40 text-goldAccent"
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePrev();
-              }}
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
+              <button
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all bg-white/10 border border-white/20 text-white hover:bg-white active:bg-white active:text-greenDeep active:scale-95 pointer-events-auto backdrop-blur-xl group"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNext();
+                }}
+              >
+                <ChevronRight size={28} className="sm:w-10 sm:h-10 transition-transform group-hover:translate-x-1" />
+              </button>
+            </div>
 
-            <button
-              className="absolute right-6 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 bg-goldAccent/20 border border-goldAccent/40 text-goldAccent"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNext();
-              }}
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
+            {/* Top Close Control - Premium Position */}
+            <div className="absolute top-6 right-6 z-[140]">
+              <button
+                className="w-12 h-12 rounded-full flex items-center justify-center transition-all bg-white/15 border border-white/20 text-white hover:bg-red-500 hover:border-red-400 active:scale-90 backdrop-blur-xl shadow-lg"
+                onClick={() => setSelectedImageIndex(null)}
+                title="Yopish (ESC)"
+              >
+                <X size={28} />
+              </button>
+            </div>
 
+            {/* Image & Info Wrapper */}
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative max-w-6xl max-h-[90vh] w-full"
+              initial={{ scale: 0.95, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 20, opacity: 0 }}
+              className="relative flex flex-col items-center justify-center w-full h-[90vh] max-w-6xl px-4 select-none"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
-                src={galleryImages[selectedImage].url}
-                alt={galleryImages[selectedImage].title}
-                className="w-full h-full object-contain rounded-2xl"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-6 rounded-b-2xl bg-gradient-to-t from-greenDeep/90 to-transparent">
-                <div className="text-2xl text-white">
-                  {galleryImages[selectedImage].title}
-                </div>
+              <div className="relative w-full flex-grow flex items-center justify-center overflow-hidden">
+                <img
+                  src={getImageUrl(products[selectedImageIndex].images)}
+                  alt={products[selectedImageIndex].name}
+                  className="max-w-full max-h-full object-contain rounded-xl sm:rounded-3xl shadow-[0_0_80px_rgba(0,0,0,0.5)] bg-black/20"
+                />
+              </div>
+
+              {/* Product Info In Modal - Compact & Clear */}
+              <div className="w-full max-w-2xl px-6 py-8 text-center bg-gradient-to-t from-greenDeep/80 to-transparent rounded-b-3xl mt-4">
+                <motion.h2
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  key={products[selectedImageIndex].id + "-name"}
+                  className="text-2xl sm:text-4xl font-serif text-white mb-3 font-medium tracking-tight"
+                >
+                  {products[selectedImageIndex].name}
+                </motion.h2>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  key={products[selectedImageIndex].id + "-price"}
+                  className="flex flex-col items-center gap-2"
+                >
+                  <div className="px-5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/50 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mt-2">
+                    {selectedImageIndex + 1} / {products.length}
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
-
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full text-sm bg-goldAccent/20 border border-goldAccent/40 text-goldAccent">
-              {selectedImage + 1} / {galleryImages.length}
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
 
-        <footer className='bg-greenDeep'>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="p-8 flex flex-col md:flex-row justify-between items-center gap-4 "
-          >
-            <p className="text-sm text-center md:text-left text-white/50">
-              © 2026 SofMebel.uz. Barcha huquqlar himoyalangan.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-6">
-              {["Maxfiylik Siyosati", "Xizmat Shartlari", "Cookie Siyosati"].map(
-                (link) => (
-                  <a
-                    key={link}
-                    href="#"
-                    className="text-sm transition-colors duration-300 hover:text-goldAccent text-white/50"
-                  >
-                    {link}
-                  </a>
-                )
-              )}
-            </div>
-          </motion.div>
-        </footer>
-      </div>
     </main>
   );
 }
