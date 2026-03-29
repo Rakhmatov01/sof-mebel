@@ -15,6 +15,8 @@ export interface CategoryModel {
   id: number;
   slug: string;
   name: string;
+  image?: string;
+  main_true?: boolean;
 }
 
 export interface ProductModel {

@@ -50,8 +50,8 @@ export function Hero() {
     // ── Stats count-up ─────────────────────────────────────────────────────
     const statData: { selector: string; end: number; fmt: (v: number) => string }[] = [
       { selector: "#stat-val-0", end: 500, fmt: v => `${Math.floor(v)}+` },
-      { selector: "#stat-val-1", end: 50, fmt: v => `${Math.floor(v)}K+` },
-      { selector: "#stat-val-2", end: 25, fmt: v => `${Math.floor(v)}+` },
+      { selector: "#stat-val-1", end: 10, fmt: v => `${Math.floor(v)}K+` },
+      { selector: "#stat-val-2", end: 14, fmt: v => `${Math.floor(v)}+` },
     ];
     statData.forEach(({ selector, end, fmt }, i) => {
       const el = document.querySelector(selector);

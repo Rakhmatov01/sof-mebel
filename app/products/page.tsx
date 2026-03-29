@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { listCategories, listProducts } from "@/lib/api/sofmebelApi";
 import { ProductCard } from "@/components/ProductCard";
@@ -8,13 +10,23 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import Pagination from "@/components/pagination";
 import { motion, AnimatePresence } from "motion/react";
-import { Search, Grid, List } from "lucide-react";
+import { Search, Grid, List, Loader2 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
-export default function OnlineMagazinePage() {
+export function OnlineMagazineContent() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Sync state with URL parameter on mount or change
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [categoryParam]);
 
   // TanStack Query for Categories
   const { data: categories = [], isLoading: loadingCategories } = useQuery({
@@ -173,5 +185,17 @@ export default function OnlineMagazinePage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function OnlineMagazinePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#faf9f0] flex items-center justify-center">
+        <Loader2 className="animate-spin text-goldAccent" size={64} />
+      </div>
+    }>
+      <OnlineMagazineContent />
+    </Suspense>
   );
 }
