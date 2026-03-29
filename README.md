@@ -10,18 +10,18 @@ Sof Mebel is a high-end furniture brand offering a wide range of beautifully cra
 
 Our website is designed with our customers in mind, offering the following key features:
 
-*   **Online Showroom:** Browse our main furniture collections for the living room, dining room, and bedroom.
-*   **Why Choose Us:** Discover the advantages of choosing Sof Mebel for your furniture needs.
-*   **About Us:** Learn more about our company's history, values, and our physical showroom.
-*   **Online Magazine (Coming Soon):** Stay tuned for our upcoming online magazine, where we'll share articles on interior design, furniture care, and more.
+- **Online Showroom:** Browse our main furniture collections for the living room, dining room, and bedroom.
+- **Why Choose Us:** Discover the advantages of choosing Sof Mebel for your furniture needs.
+- **About Us:** Learn more about our company's history, values, and our physical showroom.
+- **Online Magazine (Coming Soon):** Stay tuned for our upcoming online magazine, where we'll share articles on interior design, furniture care, and more.
 
 ## Technologies We Use
 
 To provide the best possible online experience, we use the latest web technologies:
 
-*   **Next.js & React:** For a fast, modern, and responsive website that works beautifully on all devices.
-*   **Tailwind CSS:** To create a clean, elegant, and visually appealing design.
-*   **TypeScript:** To ensure the highest quality and reliability of our code.
+- **Next.js & React:** For a fast, modern, and responsive website that works beautifully on all devices.
+- **Tailwind CSS:** To create a clean, elegant, and visually appealing design.
+- **TypeScript:** To ensure the highest quality and reliability of our code.
 
 ## Running the Project Locally (For Developers)
 
@@ -41,6 +41,15 @@ If you're a developer and would like to run the project locally, please follow t
     ```
 4.  **Open your browser:**
     Open [http://localhost:3000](http://localhost:3000) to view the project.
+
+## API Setup
+
+1.  Copy `.env.example` to `.env.local`.
+2.  Set your backend base URL in the `.env.local` file:
+    ```bash
+    NEXT_PUBLIC_API_BASE_URL=https://api.example.com
+    ```
+3.  Restart the development server after you update env values.
 
 ---
 

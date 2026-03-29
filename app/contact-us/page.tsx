@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Mail, MapPin, Phone, Clock3 } from "lucide-react";
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import ContactFooter from "@/components/contact";
+
 
 export default function ContactUsPage() {
   return (
@@ -254,6 +256,7 @@ export default function ContactUsPage() {
     </section>
             </div>
       </main>
+     <ContactFooter />
       <Footer />
     </>
   );

@@ -85,9 +85,9 @@ export default function AboutUs() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className='text-4xl lg:text-5xl xl:text-6xl mb-6 tracking-tight font-serif text-white font-light -tracking-[0.02em]'
           >
-            1998-yildan beri
+            2012-yildan beri
             <span className='block mt-2 text-goldAccent font-normal'>
-              Mukammallik yaratamiz
+              Mukammallik sari intilamiz
             </span>
           </motion.h2>
 
@@ -98,10 +98,14 @@ export default function AboutUs() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className='text-lg max-w-3xl mx-auto leading-relaxed text-white/70'
           >
-            Ikki o‘n yillikdan ortiq vaqt davomida biz hashamatli mebel
-            dizaynida yetakchilik qilmoqdamiz, abadiy nafislikni zamonaviy
-            innovatsiyalar bilan uyg‘unlashtirib, trendlarni ortda qoldiradigan
-            va avlodlarga meros bo‘lib qoladigan mahsulotlar yaratamiz.
+            O‘n yildan ortiq vaqt davomida Sofmebel zamonaviy
+            va sifatli mebel ishlab chiqarishda ishonchli brend 
+            sifatida faoliyat yuritib kelmoqda. Biz har bir mahsulotimizda 
+            nafis dizayn, mustahkamlik va maksimal qulaylikni uyg‘unlashtirishga intilamiz.
+            Kompaniyamiz mijozlarga nafaqat mebel, balki uzoq yillar xizmat 
+            qiladigan, estetik va funksional yechimlarni taqdim etadi. Har bir
+            mahsulot zamonaviy tendensiyalar asosida ishlab chiqilib, turmush
+            tarzingizga mos ravishda yaratiladi.
           </motion.p>
         </div>
 
@@ -129,7 +133,7 @@ export default function AboutUs() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className='absolute -bottom-8 -right-8 p-8 rounded-2xl backdrop-blur-xl bg-goldAccent/90 border border-goldAccent/30'
             >
-              <div className='text-5xl mb-2 text-greenDeep font-light'>25+</div>
+              <div className='text-5xl mb-2 text-greenDeep font-light'>14+</div>
               <div className='text-sm text-greenDeep/80'>
                 Yillik mukammal tajriba
               </div>
@@ -149,30 +153,32 @@ export default function AboutUs() {
             </h3>
 
             <p className='text-base leading-relaxed text-white/70'>
-              Bizning sayohatimiz Manhattan shahridagi kichik ustaxonaning
-              eshigidan boshlandi, u yerda asoschi Alexander Sterling hashamatli
-              yashash tajribasini qayta belgilaydigan mebellar yaratishni
-              tasavvur qilgan edi. Dastlab ehtiros bilan boshlangan loyiha butun
-              dunyoda tan olingan, nozik didli mijozlar tomonidan ishonch bilan
-              tanlangan global brendga aylandi.
+              Sofmebel’ning yo‘li 2012-yilda kichik ustaxonadan
+              boshlangan bo‘lib, qisqa vaqt ichida sifat va 
+              ishonch timsoliga aylandi. Bugungi kunda kompaniya 
+              zamonaviy mebel ishlab chiqarish sohasida o‘z o‘rniga 
+              ega bo‘lib, ko‘plab mijozlar ishonchini qozongan.
             </p>
 
             <p className='text-base leading-relaxed text-white/70'>
-              Har bir mahsulotimiz mukammallikka bo‘lgan sadoqatimizning yorqin
-              dalilidir. Bizning mohir ustalarimiz, ko‘pchiligi boshidan beri
-              biz bilan birga ishlagan, har bir loyihaga o‘nlab yillik tajribani
-              olib keladi. Biz faqat eng sifatli va barqaror manbalardan
-              materiallar tanlaymiz, shunda go‘zallik va mas’uliyat birga
-              uyg‘unlashadi.
+             Har bir mahsulotimiz — bu mukammallikka bo‘lgan
+            intilishimizning natijasidir. Tajribali ustalarimiz 
+            har bir detal ustida puxta ishlaydi, faqat sifatli 
+            va ishonchli materiallardan foydalanadi. Shu sababli
+              mahsulotlarimiz nafaqat chiroyli, balki uzoq muddat 
+              xizmat qilishga mo‘ljallangan.
             </p>
 
             <p className='text-base leading-relaxed text-white/70'>
-              Bugun bizning mebellarimiz 15 dan ortiq mamlakatdagi uylarda,
-              Toshkentdagi penthauslardan Chorvoqdagi villalargacha bezak
-              sifatida joy olgan. Shu bilan birga, biz birinchi kundan boshlab
-              bizni boshqargan tamoyillarga sodiq qolamiz: mukammal ustachilik,
-              innovatsion dizayn va mijozlarimizning vizyoniga bo‘lgan qat’iy
-              bag‘rikenglik.
+              Bugungi kunda Sofmebel mahsulotlari turli hududlardagi 
+              uylar va interyerlarni bezab kelmoqda. Divanlar, krovatlar,
+              shkaflar va boshqa mebellarimiz zamonaviy dizayn va qulaylikni
+                birlashtirgan holda ishlab chiqariladi.
+            </p>
+
+            <p className='text-base leading-relaxed text-white/70'>
+              Biz boshidan beri bir tamoyilga amal qilamiz: sifat,
+              ishonch va mijoz ehtiyojlarini birinchi o‘ringa qo‘yish.
             </p>
 
             <div className='flex gap-4 pt-4'>
@@ -254,24 +260,24 @@ export default function AboutUs() {
 
             {[
               {
-                year: "1998",
+                year: "2012",
                 title: "Boshlanish",
                 description:
                   "Mukammallik vizyoniga ega kichik Manhattan ustaxonasida asos solindi",
               },
               {
-                year: "2005",
+                year: "2015",
                 title: "Global Kengayish",
                 description: "London, Parij va Dubay shourumlari ochildi",
               },
               {
-                year: "2012",
+                year: "2018",
                 title: "Innovatsiya Mukofoti",
                 description:
                   "Xalqaro Dizayn Mukammalligi Mukofoti bilan taqdirlandi",
               },
               {
-                year: "2018",
+                year: "2023",
                 title: "Barqaror Kelajak",
                 description:
                   "Barqaror materiallardan foydalangan ekologik toza kolleksiya ishga tushirildi",

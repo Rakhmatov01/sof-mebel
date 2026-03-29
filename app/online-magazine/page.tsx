@@ -13,6 +13,8 @@ import {
   User,
   Store,
 } from "lucide-react";
+import Pagination from "@/components/pagination";
+import ContactFooter from "@/components/contact";
 
 const products = [
   {
@@ -143,6 +145,7 @@ function MobileBottomNav() {
     { label: "CART", icon: ShoppingCart, active: false, href:"/cart" },
     { label: "PROFILE", icon: User, active: false, href:"/online-magazine" },
   ];
+
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 md:hidden">
@@ -325,11 +328,17 @@ export default function OnlineMagazinePage() {
                 ))}
               </div>
             </div>
+        <Pagination
+  currentPage={1}
+  totalPages={1}
+  onPageChange={()=>{}}
+/>
           </section>
         </div>
       </main>
 
       <MobileBottomNav />
+      <ContactFooter />
       <Footer />
     </>
   );

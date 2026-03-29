@@ -8,19 +8,9 @@ import {
   Mail,
   Phone,
   MapPin,
-  Send,
 } from "lucide-react";
-import { useState } from "react";
 import Link from "next/link";
-
 export function Footer() {
-  const [email, setEmail] = useState("");
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Subscribe:", email);
-    setEmail("");
-  };
 
   return (
     <footer className='relative w-full pt-20 pb-8 bg-greenDeep'>
@@ -36,45 +26,6 @@ export function Footer() {
       </div>
 
       <div className='relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12'>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className='mb-16 pb-16 border-b border-goldAccent/20'
-        >
-          <div className='max-w-2xl mx-auto text-center'>
-            <h3 className='text-3xl lg:text-4xl mb-4 text-white font-serif'>
-              Ilhomlanishda <span className='text-goldAccent'>Davom eting</span>
-            </h3>
-            <p className='text-base mb-8 text-white/70'>
-              Eksklyuziv dizaynlar, yangi kolleksiyalarga erta kirish va
-              mutaxassislarimizdan ichki dizayn bo‘yicha maslahatlar uchun
-              bizning axborot byulletenimizga obuna bo‘ling.
-            </p>
-
-            <form
-              onSubmit={handleSubscribe}
-              className='flex gap-3 max-w-lg mx-auto'
-            >
-              <input
-                type='email'
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder='Emailingizni kiriting'
-                className='flex-1 px-6 py-4 rounded-full outline-none transition-all duration-300 bg-white/10 border border-goldAccent/30 text-white'
-                required
-              />
-              <button
-                type='submit'
-                className='px-8 py-4 rounded-full flex items-center gap-2 transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-goldAccent text-greenDeep font-medium'
-              >
-                <span className='hidden md:block'>Obuna bo&apos;lish</span>
-                <Send className='w-4 h-4' />
-              </button>
-            </form>
-          </div>
-        </motion.div>
 
         <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16'>
           <motion.div
@@ -89,7 +40,7 @@ export function Footer() {
               </div>
             </Link>
             <p className='text-sm leading-relaxed mb-6 text-white/60'>
-              1998-yildan beri abadiy nafislikni yaratamiz. Biz makonlarni
+              2012-yildan beri abadiy nafislikni yaratamiz. Biz makonlarni
               o‘zgartiradigan va turmush tarzini yuksaltiradigan, avlodlarga
               meros bo‘lib qoladigan mahsulotlar ishlab chiqamiz.
             </p>
