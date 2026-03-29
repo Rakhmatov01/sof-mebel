@@ -4,172 +4,12 @@ import { useEffect, useMemo, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
-import DesktopTopActions from "@/components/DesktopTopActions";
 import {
-  Menu,
-  ShoppingBag,
-  Search,
-  ShoppingCart,
-  User,
   Store,
 } from "lucide-react";
 import Pagination from "@/components/pagination";
 import { listCategories, listProducts } from "@/lib/api/sofmebelApi";
 import { CategoryModel, ProductModel } from "@/lib/types/api";
-
-// const products = [
-//   {
-//     id: 1,
-//     title: "Meyn",
-//     brand: "Asento",
-//     category: "Yotoqxona",
-//     price: "9 000 000 UZS",
-//     oldPrice: null,
-//     image:
-//       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&auto=format&fit=crop&q=80",
-//   },
-//   {
-//     id: 2,
-//     title: "Svetilnik",
-//     brand: "Cozy House",
-//     category: "Yoritish",
-//     price: "2 392 000 UZS",
-//     oldPrice: null,
-//     image:
-//       "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&auto=format&fit=crop&q=80",
-//   },
-//   {
-//     id: 3,
-//     title: "Nastolnaya lampa",
-//     brand: "Cozy House",
-//     category: "Yoritish",
-//     price: "1 095 000 UZS",
-//     oldPrice: null,
-//     image:
-//       "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=800&auto=format&fit=crop&q=80",
-//   },
-//   {
-//     id: 4,
-//     title: "Jurnalniy stolik",
-//     brand: "Strong",
-//     category: "Stollar",
-//     price: "7 250 000 UZS",
-//     oldPrice: "7 855 000 UZS",
-//     image:
-//       "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=800&auto=format&fit=crop&q=80",
-//   },
-//   {
-//     id: 5,
-//     title: "Divan",
-//     brand: "Maison",
-//     category: "Yumshoq mebel",
-//     price: "12 400 000 UZS",
-//     oldPrice: null,
-//     image:
-//       "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&auto=format&fit=crop&q=80",
-//   },
-//   {
-//     id: 6,
-//     title: "Torsher",
-//     brand: "Lumen",
-//     category: "Yoritish",
-//     price: "1 780 000 UZS",
-//     oldPrice: null,
-//     image:
-//       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&auto=format&fit=crop&q=80",
-//   },
-//   {
-//     id: 7,
-//     title: "Kreslo",
-//     brand: "Soft Line",
-//     category: "Yumshoq mebel",
-//     price: "4 890 000 UZS",
-//     oldPrice: null,
-//     image:
-//       "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=800&auto=format&fit=crop&q=80",
-//   },
-//   {
-//     id: 8,
-//     title: "Komod",
-//     brand: "Wood Art",
-//     category: "Saqlash",
-//     price: "6 300 000 UZS",
-//     oldPrice: "6 950 000 UZS",
-//     image:
-//       "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&auto=format&fit=crop&q=80",
-//   },
-//   {
-//     id: 9,
-//     title: "Dekor lampa",
-//     brand: "Glow Home",
-//     category: "Dekor",
-//     price: "980 000 UZS",
-//     oldPrice: null,
-//     image:
-//       "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&auto=format&fit=crop&q=80",
-//   },
-//   {
-//     id: 10,
-//     title: "Konsol stol",
-//     brand: "Nordic",
-//     category: "Stollar",
-//     price: "5 750 000 UZS",
-//     oldPrice: null,
-//     image:
-//       "https://images.unsplash.com/photo-1494526585095-c41746248156?w=800&auto=format&fit=crop&q=80",
-//   },
-// ];
-
-function MobileTopBar() {
-  return (
-    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between bg-[#f6f3eb]/90 px-4 py-4 backdrop-blur-xl md:hidden">
-      <button className="text-[#203b28]">
-        <Menu size={22} />
-      </button>
-
-      <h1 className="text-xl font-bold tracking-tight text-[#203b28]">
-        SafMebel
-      </h1>
-
-      <button className="text-[#203b28]">
-        <ShoppingBag size={22} />
-      </button>
-    </header>
-  );
-}
-
-function MobileBottomNav() {
-  const items = [
-    { label: "Do‘kon", icon: Store, active: true, href: "/online-magazine" },
-    { label: "Savat", icon: ShoppingCart, active: false, href: "/cart" },
-  ];
-
-  return (
-    <nav className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 md:hidden">
-      <div className="mx-auto flex max-w-md items-center justify-around rounded-[32px] border border-[#e7e2d8] bg-[#f6f3eb]/95 px-3 py-3 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl">
-        {items.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`flex min-w-[72px] flex-col items-center justify-center rounded-full px-4 py-2 transition ${item.active
-                ? "bg-[#203b28] text-white"
-                : "text-[#7a6a49] hover:text-[#203b28]"
-                }`}
-            >
-              <Icon size={20} />
-              <span className="mt-1 text-[10px] font-medium tracking-[0.18em]">
-                {item.label}
-              </span>
-            </Link>
-          );
-        })}
-      </div>
-    </nav>
-  );
-}
 
 export default function OnlineMagazinePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -215,7 +55,7 @@ export default function OnlineMagazinePage() {
         setProducts(data.results);
 
         const calculatedTotalPages =
-          data.count > 0 ? Math.ceil(data.count / data.results.length || 1) : 1;
+          data.count > 0 ? Math.ceil(data.count / (data.results.length || 1)) : 1;
 
         setTotalPages(calculatedTotalPages);
       } catch (error) {
@@ -261,7 +101,6 @@ export default function OnlineMagazinePage() {
     <>
       <main className="relative min-h-screen overflow-hidden bg-greenDeep pb-32 md:pb-0">
         <Navbar />
-        <MobileTopBar />
 
         {/* Ambient background decorative elements */}
         <div className="absolute inset-0 pointer-events-none opacity-25">
@@ -287,12 +126,10 @@ export default function OnlineMagazinePage() {
           }}
         />
 
-        <div className="relative">
+        <div className="relative pt-24 md:pt-32">
           <div className="container-custom">
-            <DesktopTopActions />
-
             {/* Header Content Section - Aligned via container-custom */}
-            <section className="mb-8 mt-20 rounded-[28px] py-4 md:mb-12 md:mt-24 md:py-10">
+            <section className="mb-8 rounded-[28px] py-4 md:mb-12 md:py-10">
               <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-2xl">
                   <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.2em] text-goldAccent md:text-lg md:font-medium md:tracking-[0.18em] md:text-white">
@@ -325,7 +162,6 @@ export default function OnlineMagazinePage() {
 
             {/* Categories Section - Aligned via container-custom */}
             <section className="relative mb-12">
-              {/* Category list needs to be able to scroll to the edge on mobile, but align with container on desktop */}
               <div className="-mx-6 overflow-x-auto px-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden lg:-mx-12 lg:px-12">
                 <div className="flex w-max gap-3 py-2">
                   {loadingCategories ? (
@@ -358,9 +194,7 @@ export default function OnlineMagazinePage() {
             </section>
           </div>
 
-          {/* Products Section - Full background with centered inner container */}
           <section className="relative mt-4 bg-[#f8f7f2] py-12">
-            {/* Top rounded corner effect to transition from dark to light */}
             <div className="absolute -top-8 left-0 right-0 h-16 rounded-[40px] bg-[#f8f7f2]" />
 
             <div className="container-custom">
@@ -452,7 +286,6 @@ export default function OnlineMagazinePage() {
         </div>
       </main>
 
-      <MobileBottomNav />
       <Footer />
     </>
   );

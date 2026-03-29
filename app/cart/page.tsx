@@ -4,14 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import DesktopTopActions from "@/components/DesktopTopActions";
 import {
-  Menu,
-  ShoppingBag,
-  Search,
-  ShoppingCart,
-  User,
-  Store,
   Minus,
   Plus,
   X,
@@ -30,57 +23,6 @@ import { createOrder } from "@/lib/api/sofmebelApi";
 
 function formatPrice(price: number) {
   return `${price.toLocaleString("ru-RU")} UZS`;
-}
-
-function MobileTopBar() {
-  return (
-    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between bg-[#f6f3eb]/90 px-4 py-4 backdrop-blur-xl md:hidden">
-      <button className="text-[#203b28]">
-        <Menu size={22} />
-      </button>
-
-      <h1 className="text-xl font-bold tracking-tight text-[#203b28]">
-        SafMebel
-      </h1>
-
-      <Link href="/cart" className="text-[#203b28]">
-        <ShoppingBag size={22} />
-      </Link>
-    </header>
-  );
-}
-
-function MobileBottomNav() {
-  const items = [
-    { label: "Do‘kon", icon: Store, active: false, href: "/online-magazine" },
-    { label: "Savat", icon: ShoppingCart, active: true, href: "/cart" },
-  ];
-
-  return (
-    <nav className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 md:hidden">
-      <div className="mx-auto flex max-w-md items-center justify-around rounded-[32px] border border-[#e7e2d8] bg-[#f6f3eb]/95 px-3 py-3 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl">
-        {items.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`flex min-w-[72px] flex-col items-center justify-center rounded-full px-4 py-2 transition ${item.active
-                  ? "bg-[#203b28] text-white"
-                  : "text-[#7a6a49] hover:text-[#203b28]"
-                }`}
-            >
-              <Icon size={20} />
-              <span className="mt-1 text-[10px] font-medium tracking-[0.18em]">
-                {item.label}
-              </span>
-            </Link>
-          );
-        })}
-      </div>
-    </nav>
-  );
 }
 
 export default function CartPage() {
@@ -184,14 +126,9 @@ export default function CartPage() {
   return (
     <>
       <main className="relative min-h-screen overflow-hidden bg-[#faf9f4] pb-[60px] md:pb-0">
-        <MobileTopBar />
-
         <div className="relative mx-auto w-full max-w-[1600px] pt-20 md:pt-5">
-          <div className="hidden md:block">
-            <Navbar />
-          </div>
+          <Navbar />
 
-          <DesktopTopActions />
 
           <section className="px-4 pb-10 pt-6 md:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">
@@ -423,8 +360,6 @@ export default function CartPage() {
           </section>
         </div>
       </main>
-
-      <MobileBottomNav />
       <div className="hidden md:block">
         <Footer />
       </div>
