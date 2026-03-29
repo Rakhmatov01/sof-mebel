@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { useCartStore } from "@/store/useCartStore";
 import {
   Minus,
   Plus,
@@ -12,13 +13,6 @@ import {
   Trash2,
   Shield,
 } from "lucide-react";
-import {
-  getCartItems,
-  removeFromCart,
-  updateCartItemQuantity,
-  clearCart,
-  type CartItem,
-} from "@/lib/cart";
 import { createOrder } from "@/lib/api/sofmebelApi";
 
 function formatPrice(price: number) {
@@ -26,7 +20,8 @@ function formatPrice(price: number) {
 }
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const { items, removeItem, updateQuantity, clearCart, totalPrice } = useCartStore();
+
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("+998");
   const [message, setMessage] = useState("");
@@ -34,47 +29,12 @@ export default function CartPage() {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const refreshCart = () => {
-    setCartItems(getCartItems());
-  };
-
-  useEffect(() => {
-    refreshCart();
-  }, []);
-
-  const updateQuantity = (id: number, type: "inc" | "dec") => {
-    const targetItem = cartItems.find((item) => item.id === id);
-    if (!targetItem) return;
-
-    if (type === "dec") {
-      const nextQuantity = Math.max(1, targetItem.quantity - 1);
-      updateCartItemQuantity(id, nextQuantity);
-    } else {
-      updateCartItemQuantity(id, targetItem.quantity + 1);
-    }
-
-    refreshCart();
-  };
-
-  const removeItem = (id: number) => {
-    removeFromCart(id);
-    refreshCart();
-  };
-
-  const subtotal = useMemo(
-    () =>
-      cartItems.reduce(
-        (sum, item) => sum + Number(item.price) * item.quantity,
-        0
-      ),
-    [cartItems]
-  );
-
-  const deliveryFee = cartItems.length > 0 ? 0 : 0;
+  const subtotal = totalPrice();
+  const deliveryFee = items.length > 0 ? 0 : 0;
   const total = subtotal + deliveryFee;
 
   const handleCheckout = async () => {
-    if (cartItems.length === 0) {
+    if (items.length === 0) {
       setErrorMessage("Savat bo‘sh.");
       setSuccessMessage("");
       return;
@@ -101,14 +61,13 @@ export default function CartPage() {
         full_name: fullName.trim(),
         phone: phone.trim(),
         message: message.trim(),
-        items: cartItems.map((item) => ({
+        items: items.map((item) => ({
           product_id: item.id,
           quantity: item.quantity,
         })),
       });
 
       clearCart();
-      refreshCart();
       setFullName("");
       setPhone("");
       setMessage("");
@@ -119,7 +78,6 @@ export default function CartPage() {
       setSuccessMessage("");
     } finally {
       setIsSubmitting(false);
-      console.log()
     }
   };
 
@@ -130,18 +88,18 @@ export default function CartPage() {
           <Navbar />
 
 
-          <section className="px-4 pb-10 pt-6 md:px-6 lg:px-8">
+          <section className="px-4 pb-10 pt-20 md:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">
               <header className="mb-8 md:mb-12">
                 <h1 className="text-3xl font-bold text-[#203b28] md:text-5xl">
                   Savat
                 </h1>
                 <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-[#7a6a49] md:text-sm">
-                  {cartItems.length} ta mahsulot
+                  {items.length} ta mahsulot
                 </p>
               </header>
 
-              {cartItems.length === 0 ? (
+              {items.length === 0 ? (
                 <div className="rounded-[28px] border border-[#ded9cf] bg-white p-8 text-center md:p-14">
                   <h2 className="text-2xl font-semibold text-[#203b28]">
                     Savat hozircha bo‘sh
@@ -157,16 +115,16 @@ export default function CartPage() {
                   )}
 
                   <Link
-                  href="/products"
-                  className="mt-6 inline-flex rounded-full bg-[#203b28] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
-                >
-                  Do‘konga qaytish
-                </Link>
+                    href="/products"
+                    className="mt-6 inline-flex rounded-full bg-[#203b28] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
+                  >
+                    Do‘konga qaytish
+                  </Link>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
                   <div className="space-y-5 lg:col-span-8">
-                    {cartItems.map((item) => (
+                    {items.map((item) => (
                       <article
                         key={item.id}
                         className="group rounded-[22px] border border-[#e8e3d8] bg-white p-4 shadow-[0_4px_24px_rgba(33,52,38,0.04)] md:flex md:items-center md:gap-8 md:p-6"
@@ -208,7 +166,7 @@ export default function CartPage() {
                           <div className="mt-5 flex items-end justify-between gap-4">
                             <div className="flex items-center rounded-full bg-[#f3efe6] px-2 py-1">
                               <button
-                                onClick={() => updateQuantity(item.id, "dec")}
+                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                 className="flex h-8 w-8 items-center justify-center text-[#6c6a63] transition hover:text-[#203b28]"
                               >
                                 <Minus size={16} />
@@ -219,7 +177,7 @@ export default function CartPage() {
                               </span>
 
                               <button
-                                onClick={() => updateQuantity(item.id, "inc")}
+                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                 className="flex h-8 w-8 items-center justify-center text-[#6c6a63] transition hover:text-[#203b28]"
                               >
                                 <Plus size={16} />
