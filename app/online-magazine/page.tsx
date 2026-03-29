@@ -14,9 +14,8 @@ import {
   Store,
 } from "lucide-react";
 import Pagination from "@/components/pagination";
-import ContactFooter from "@/components/contact";
 import { listCategories, listProducts } from "@/lib/api/sofmebelApi";
-import { CategoryModel , ProductModel  } from "@/lib/types/api";
+import { CategoryModel, ProductModel } from "@/lib/types/api";
 
 // const products = [
 //   {
@@ -157,11 +156,10 @@ function MobileBottomNav() {
             <Link
               key={item.label}
               href={item.href}
-              className={`flex min-w-[72px] flex-col items-center justify-center rounded-full px-4 py-2 transition ${
-                item.active
+              className={`flex min-w-[72px] flex-col items-center justify-center rounded-full px-4 py-2 transition ${item.active
                   ? "bg-[#203b28] text-white"
                   : "text-[#7a6a49] hover:text-[#203b28]"
-              }`}
+                }`}
             >
               <Icon size={20} />
               <span className="mt-1 text-[10px] font-medium tracking-[0.18em]">
@@ -247,23 +245,23 @@ export default function OnlineMagazinePage() {
   }, [categories]);
 
   const getImageUrl = (images?: string) => {
-  if (!images) return "/placeholder.png";
-  console.log("images->" , images);
+    if (!images) return "/placeholder.png";
+    console.log("images->", images);
 
-  const firstImage = images[0]?.trim();
+    const firstImage = images[0]?.trim();
 
-  if (!firstImage) return "/placeholder.png";
+    if (!firstImage) return "/placeholder.png";
 
-  if (
-    firstImage.startsWith("http://") ||
-    firstImage.startsWith("https://")
-  ) {
-    return firstImage;
-  }
+    if (
+      firstImage.startsWith("http://") ||
+      firstImage.startsWith("https://")
+    ) {
+      return firstImage;
+    }
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-  return `${baseUrl}${firstImage}`;
-};
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+    return `${baseUrl}${firstImage}`;
+  };
 
   return (
     <>
@@ -351,11 +349,10 @@ export default function OnlineMagazinePage() {
                             setSelectedCategory(category.value);
                             setCurrentPage(1);
                           }}
-                          className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition ${
-                            isActive
+                          className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition ${isActive
                               ? "bg-white text-[#0f172a]"
                               : "bg-white/10 text-white hover:bg-white/15"
-                          }`}
+                            }`}
                         >
                           {category.label}
                         </button>
@@ -445,7 +442,6 @@ export default function OnlineMagazinePage() {
       </main>
 
       <MobileBottomNav />
-      <ContactFooter />
       <Footer />
     </>
   );

@@ -61,18 +61,18 @@ export default function ProductDetailClient({ product }: Props) {
 
   const [addedToCart, setAddedToCart] = useState(false);
 
-const handleAddToCart = () => {
-  addToCart({
-    id: product.id,
-    slug: product.slug,
-    name: product.name,
-    price: product.price,
-    image: imageUrl,
-    quantity,
-  });
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      slug: product.slug,
+      name: product.name,
+      price: product.price,
+      image: imageUrl,
+      quantity,
+    });
 
-  setAddedToCart(true);
-};
+    setAddedToCart(true);
+  };
 
   return (
     <div className="min-h-screen bg-[#faf9f4] text-[#1b1c19]">
@@ -129,9 +129,8 @@ const handleAddToCart = () => {
                 className="absolute right-4 top-4 rounded-full bg-white/80 p-3 shadow-sm backdrop-blur-md transition hover:scale-105"
               >
                 <Heart
-                  className={`h-5 w-5 ${
-                    liked ? "fill-red-500 text-red-500" : "text-[#1b1c19]"
-                  }`}
+                  className={`h-5 w-5 ${liked ? "fill-red-500 text-red-500" : "text-[#1b1c19]"
+                    }`}
                 />
               </button>
             </div>
@@ -183,15 +182,14 @@ const handleAddToCart = () => {
               <button
                 onClick={handleAddToCart}
                 disabled={addedToCart}
-                className={`flex h-14 flex-1 items-center justify-center gap-2 rounded-full px-6 font-bold tracking-wide text-white transition active:scale-[0.98] ${
-                    addedToCart
+                className={`flex h-14 flex-1 items-center justify-center gap-2 rounded-full px-6 font-bold tracking-wide text-white transition active:scale-[0.98] ${addedToCart
                     ? "bg-green-700"
                     : "bg-[#0c1f12] hover:opacity-95"
-                }`}
-                >
+                  }`}
+              >
                 {addedToCart ? "Qo‘shildi" : "Savatga qo‘shish"}
                 <ShoppingCart className="h-5 w-5" />
-                </button>
+              </button>
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -227,22 +225,20 @@ const handleAddToCart = () => {
             <div className="flex min-w-max gap-8">
               <button
                 onClick={() => setActiveTab("description")}
-                className={`border-b-2 pb-4 pt-2 font-serif text-lg transition ${
-                  activeTab === "description"
+                className={`border-b-2 pb-4 pt-2 font-serif text-lg transition ${activeTab === "description"
                     ? "border-[#0c1f12] font-bold text-[#1b1c19]"
                     : "border-transparent text-[#434843] hover:text-[#1b1c19]"
-                }`}
+                  }`}
               >
                 Tavsif
               </button>
 
               <button
                 onClick={() => setActiveTab("specifications")}
-                className={`border-b-2 pb-4 pt-2 font-serif text-lg transition ${
-                  activeTab === "specifications"
+                className={`border-b-2 pb-4 pt-2 font-serif text-lg transition ${activeTab === "specifications"
                     ? "border-[#0c1f12] font-bold text-[#1b1c19]"
                     : "border-transparent text-[#434843] hover:text-[#1b1c19]"
-                }`}
+                  }`}
               >
                 Specifications
               </button>
@@ -272,17 +268,10 @@ const handleAddToCart = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-3">
+                  <div className="flex items-center justify-between gap-4 pb-3">
                     <span className="text-[#434843]">Narxi</span>
                     <span className="font-semibold text-[#1b1c19]">
                       {product.price} UZS
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between gap-4 pb-3">
-                    <span className="text-[#434843]">URL manzili</span>
-                    <span className="font-semibold text-[#1b1c19]">
-                      {product.slug}
                     </span>
                   </div>
                 </div>

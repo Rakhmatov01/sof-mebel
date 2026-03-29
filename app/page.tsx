@@ -3,7 +3,6 @@ import { Hero } from "@/components/Hero";
 import { Footer } from "@/components/Footer";
 import { Collections } from "@/components/Collections";
 import { Showroom } from "@/components/Showroom";
-import { ApiDemo } from "@/components/ApiDemo";
 
 export default function HomePage() {
   return (
@@ -17,7 +16,6 @@ export default function HomePage() {
         </div>
         <Collections />
         <Showroom />
-        <ApiDemo />
       </main>
       <Footer />
     </>

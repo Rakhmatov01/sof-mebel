@@ -4,6 +4,7 @@ import {
   Mrs_Saint_Delafield,
   Instrument_Serif,
 } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -48,6 +49,19 @@ export default function RootLayout({
       <body
         className={`antialiased ${brandFont.variable} ${instrumentSerif.variable} ${manrope.className}`}
       >
+        <NextTopLoader
+          color="#c6a969"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #c6a969,0 0 5px #c6a969"
+          zIndex={1600}
+          showAtBottom={false}
+        />
         {children}
       </body>
     </html>
