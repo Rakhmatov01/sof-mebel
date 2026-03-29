@@ -157,11 +157,11 @@ export default function CartPage() {
                   )}
 
                   <Link
-                    href="/online-magazine"
-                    className="mt-6 inline-flex rounded-full bg-[#203b28] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
-                  >
-                    Magazin ga qaytish
-                  </Link>
+                  href="/products"
+                  className="mt-6 inline-flex rounded-full bg-[#203b28] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
+                >
+                  Do‘konga qaytish
+                </Link>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">

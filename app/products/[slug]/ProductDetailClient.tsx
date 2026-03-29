@@ -1,24 +1,20 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
   CheckCircle,
-  ChevronLeft,
   Heart,
-  Menu,
   Minus,
   Plus,
-  Search,
-  ShoppingBag,
   ShoppingCart,
-  User,
   Star,
 } from "lucide-react";
 import type { ProductModel } from "@/lib/types/api";
 import { addToCart } from "@/lib/cart";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 type Props = {
   product: ProductModel;
@@ -27,14 +23,12 @@ type Props = {
 type TabKey = "description" | "specifications";
 
 export default function ProductDetailClient({ product }: Props) {
-  const router = useRouter();
-
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<TabKey>("description");
   const [liked, setLiked] = useState(false);
 
   const totalPrice = useMemo(() => {
-    return (Number(product.price) * quantity).toFixed(2);
+    return (Number(product.price) * quantity).toLocaleString();
   }, [product.price, quantity]);
 
   const increase = () => setQuantity((prev) => prev + 1);
@@ -72,44 +66,14 @@ export default function ProductDetailClient({ product }: Props) {
     });
 
     setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 2000);
   };
 
   return (
     <div className="min-h-screen bg-[#faf9f4] text-[#1b1c19]">
-      <nav className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-[#faf9f4]/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <button className="rounded-full p-2 transition hover:bg-black/5 lg:hidden">
-              <Menu className="h-5 w-5 text-[#213426]" />
-            </button>
+      <Navbar />
 
-            <Link
-              href="/online-magazine"
-              className="hidden rounded-full p-2 transition hover:bg-black/5 lg:inline-flex"
-            >
-              <ChevronLeft className="h-5 w-5 text-[#213426]" />
-            </Link>
-
-            <span className="font-serif text-2xl font-bold tracking-tight text-[#213426]">
-              SafMebel
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button className="rounded-full p-2 transition hover:bg-black/5">
-              <Search className="h-5 w-5 text-[#213426]" />
-            </button>
-            <Link href="/cart" className="rounded-full p-2 transition hover:bg-black/5">
-              <ShoppingBag className="h-5 w-5 text-[#213426]" />
-            </Link>
-            <button className="rounded-full p-2 transition hover:bg-black/5">
-              <User className="h-5 w-5 text-[#213426]" />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      <main className="mx-auto max-w-7xl px-4 pb-16 pt-20 sm:px-6 lg:px-8 lg:pt-32">
+      <main className="mx-auto max-w-7xl px-4 pb-16 pt-24 sm:px-6 lg:px-8 lg:pt-32">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <div className="relative mx-auto max-w-[420px] overflow-hidden rounded-[28px] bg-[#efeee9] sm:max-w-[480px] lg:max-w-[520px]">
@@ -152,7 +116,7 @@ export default function ProductDetailClient({ product }: Props) {
                 {product.name}
               </h1>
               <p className="shrink-0 text-2xl font-bold text-[#6b5d3e]">
-                {product.price} UZS
+                {Number(product.price).toLocaleString()} UZS
               </p>
             </div>
 
@@ -198,7 +162,7 @@ export default function ProductDetailClient({ product }: Props) {
               </button>
 
               <div className="rounded-full bg-[#efeee9] px-6 py-4 text-center font-semibold text-[#213426]">
-                Total: {totalPrice} UZS
+                Jami: {totalPrice} UZS
               </div>
             </div>
 
@@ -240,7 +204,7 @@ export default function ProductDetailClient({ product }: Props) {
                     : "border-transparent text-[#434843] hover:text-[#1b1c19]"
                   }`}
               >
-                Specifications
+                Xususiyatlar
               </button>
             </div>
           </div>
@@ -271,7 +235,7 @@ export default function ProductDetailClient({ product }: Props) {
                   <div className="flex items-center justify-between gap-4 pb-3">
                     <span className="text-[#434843]">Narxi</span>
                     <span className="font-semibold text-[#1b1c19]">
-                      {product.price} UZS
+                      {Number(product.price).toLocaleString()} UZS
                     </span>
                   </div>
                 </div>
@@ -280,6 +244,7 @@ export default function ProductDetailClient({ product }: Props) {
           )}
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

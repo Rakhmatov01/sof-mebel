@@ -238,7 +238,7 @@ export default function OnlineMagazinePage() {
                         />
                         <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/5" />
                         <Link
-                          href={`/product-detail/${product.slug}`}
+                          href={`/products/${product.slug}`}
                           className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
                         >
                           <div className="flex w-full items-center justify-center rounded-xl bg-white/95 backdrop-blur-md px-4 py-3 text-xs font-bold uppercase tracking-widest text-greenDeep">

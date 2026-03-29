@@ -153,7 +153,7 @@ export function Collections() {
                     />
                 </motion.button>
 
-                    <Link href="/online-magazine">
+                    <Link href="/products">
                 <div
                   className={`absolute inset-0 transition-opacity duration-300 bg-gradient-to-t from-greenDeep/80 via-transparent to-transparent ${
                     hoveredId === item.id ? "opacity-100" : "opacity-70"

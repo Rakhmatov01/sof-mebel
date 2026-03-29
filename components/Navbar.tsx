@@ -10,7 +10,7 @@ const navItems = [
   { label: "Bosh sahifa", href: "/" },
   { label: "Biz haqimizda", href: "/about-us" },
   { label: "Show Room", href: "/show-room" },
-  { label: "Online Magazine", href: "/online-magazine" },
+  { label: "Online Magazine", href: "/products" },
   { label: "Contact us", href: "/contact-us" },
 ];
 
@@ -53,7 +53,7 @@ export function Navbar() {
   }, []);
 
   const actionItems = [
-    { label: "Do‘kon", icon: Store, href: "/online-magazine" },
+    { label: "Do‘kon", icon: Store, href: "/products" },
     { label: "Savat", icon: ShoppingCart, href: "/cart" },
   ];
 
