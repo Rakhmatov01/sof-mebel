@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
   CheckCircle,
   Heart,
@@ -36,7 +35,6 @@ export default function ProductDetailClient({ product }: Props) {
 
   const getImageUrl = (images?: string) => {
     if (!images) return "/placeholder.png";
-
     const firstImage = images[0]?.trim();
     if (!firstImage) return "/placeholder.png";
 
@@ -69,15 +67,32 @@ export default function ProductDetailClient({ product }: Props) {
     setTimeout(() => setAddedToCart(false), 2000);
   };
 
+  // Dynamic rating logic
+  const renderStars = () => {
+    const rating = product.rating || 0;
+    return [...Array(5)].map((_, i) => (
+      <Star
+        key={i}
+        size={14}
+        className={`${
+          i < Math.floor(rating) 
+            ? "fill-goldAccent text-goldAccent" 
+            : "text-neutral-300"
+        }`}
+      />
+    ));
+  };
+
   return (
     <div className="min-h-screen bg-[#faf9f4] text-[#1b1c19]">
       <Navbar />
 
-      <main className="mx-auto max-w-7xl px-4 pb-16 pt-24 sm:px-6 lg:px-8 lg:pt-32">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+      <main className="mx-auto max-w-7xl px-4 pb-12 pt-20 sm:px-6 lg:px-8 lg:pt-32">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-16">
+          {/* Product Image Section */}
           <div className="lg:col-span-7">
-            <div className="relative mx-auto max-w-[420px] overflow-hidden rounded-[28px] bg-[#efeee9] sm:max-w-[480px] lg:max-w-[520px]">
-              <div className="relative aspect-[4/5] w-full">
+            <div className="relative mx-auto w-full overflow-hidden rounded-[24px] bg-[#efeee9] sm:rounded-[32px]">
+              <div className="relative aspect-[1/1] w-full sm:aspect-[4/5]">
                 <Image
                   src={imageUrl}
                   alt={product.name}
@@ -90,158 +105,144 @@ export default function ProductDetailClient({ product }: Props) {
 
               <button
                 onClick={() => setLiked((prev) => !prev)}
-                className="absolute right-4 top-4 rounded-full bg-white/80 p-3 shadow-sm backdrop-blur-md transition hover:scale-105"
+                className="absolute right-3 top-3 rounded-full bg-white/90 p-2.5 shadow-sm backdrop-blur-md transition-all active:scale-90 hover:bg-white"
               >
                 <Heart
-                  className={`h-5 w-5 ${liked ? "fill-red-500 text-red-500" : "text-[#1b1c19]"
-                    }`}
+                  size={20}
+                  className={`${liked ? "fill-red-500 text-red-500" : "text-[#1b1c19]"}`}
                 />
               </button>
             </div>
           </div>
 
-          <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
-            <div className="flex items-center gap-1 text-[#6b5d3e]">
-              {[1, 2, 3, 4].map((item) => (
-                <Star key={item} className="h-4 w-4 fill-current" />
-              ))}
-              <Star className="h-4 w-4 fill-current opacity-60" />
-              <span className="ml-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#434843]">
-                4.8 / Sharhlar
-              </span>
-            </div>
+          {/* Product Info Section */}
+          <div className="lg:col-span-5 flex flex-col">
+            <div className="flex flex-col gap-1 sm:gap-2">
+              <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-0.5">{renderStars()}</div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">
+                  {product.rating ? `${product.rating} / 5.0` : "Yangi"}
+                </span>
+              </div>
 
-            <div className="mt-4 flex items-start justify-between gap-4">
-              <h1 className="max-w-md font-serif text-4xl font-bold leading-tight text-[#213426] sm:text-5xl">
+              <h1 className="text-2xl font-bold leading-tight text-greenDeep sm:text-4xl lg:text-5xl">
                 {product.name}
               </h1>
-              <p className="shrink-0 text-2xl font-bold text-[#6b5d3e]">
-                {Number(product.price).toLocaleString()} UZS
-              </p>
+
+              <div className="mt-1 flex items-baseline gap-3">
+                 <p className="text-xl font-bold text-goldAccent sm:text-3xl">
+                  {Number(product.price).toLocaleString()} UZS
+                </p>
+                {/* Optional: Add old price if helpful for "Senior" feel */}
+                <span className="text-sm text-neutral-400 line-through opacity-50">
+                   {(Number(product.price) * 1.2).toLocaleString()} UZS
+                </span>
+              </div>
             </div>
 
-            <p className="mt-6 max-w-xl text-base leading-8 text-[#434843] sm:text-lg">
+            <p className="mt-4 text-sm leading-relaxed text-neutral-600 sm:mt-6 sm:text-base sm:leading-loose">
               {product.description}
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <div className="flex h-14 w-fit items-center rounded-full bg-[#e9e8e3] px-2">
+            {/* Actions Grid - Optimized for Mobile */}
+            <div className="mt-6 flex flex-col gap-4 sm:mt-8">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 items-center rounded-2xl bg-neutral-100 p-1 border border-neutral-200">
+                  <button
+                    onClick={decrease}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl transition-colors hover:bg-white active:bg-neutral-50"
+                  >
+                    <Minus size={16} />
+                  </button>
+                  <span className="w-10 text-center font-bold text-sm">{quantity}</span>
+                  <button
+                    onClick={increase}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl transition-colors hover:bg-white active:bg-neutral-50"
+                  >
+                    <Plus size={16} />
+                  </button>
+                </div>
+
                 <button
-                  onClick={decrease}
-                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-black/5"
-                >
-                  <Minus className="h-4 w-4" />
-                </button>
-
-                <span className="w-10 text-center text-lg font-bold">{quantity}</span>
-
-                <button
-                  onClick={increase}
-                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-black/5"
-                >
-                  <Plus className="h-4 w-4" />
-                </button>
-              </div>
-
-              <button
-                onClick={handleAddToCart}
-                disabled={addedToCart}
-                className={`flex h-14 flex-1 items-center justify-center gap-2 rounded-full px-6 font-bold tracking-wide text-white transition active:scale-[0.98] ${addedToCart
-                    ? "bg-green-700"
-                    : "bg-[#0c1f12] hover:opacity-95"
+                  onClick={handleAddToCart}
+                  disabled={addedToCart}
+                  className={`flex h-12 flex-1 items-center justify-center gap-2 rounded-2xl px-6 font-bold tracking-wide text-white transition-all active:scale-95 shadow-lg shadow-greenDeep/10 ${
+                    addedToCart ? "bg-green-600" : "bg-greenDeep hover:bg-greenDeep/95"
                   }`}
-              >
-                {addedToCart ? "Qo‘shildi" : "Savatga qo‘shish"}
-                <ShoppingCart className="h-5 w-5" />
-              </button>
-            </div>
+                >
+                  <ShoppingCart size={18} />
+                  <span className="text-sm">{addedToCart ? "Qo‘shildi" : "Savatga qo‘shish"}</span>
+                </button>
+              </div>
 
-            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <button className="rounded-full border border-[#c3c8c1] px-6 py-4 font-bold tracking-wide text-[#213426] transition hover:bg-[#efeee9]">
-                Hozir sotib olish
-              </button>
-
-              <div className="rounded-full bg-[#efeee9] px-6 py-4 text-center font-semibold text-[#213426]">
-                Jami: {totalPrice} UZS
+              <div className="grid grid-cols-2 gap-3">
+                <button className="flex h-12 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-sm font-bold text-greenDeep transition hover:bg-neutral-50 active:scale-95">
+                  Hozir olish
+                </button>
+                 <div className="flex h-12 items-center justify-center rounded-2xl bg-neutral-800 px-4 text-sm font-bold text-white">
+                  Jami: {totalPrice}
+                </div>
               </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 gap-4 border-t border-[#e3e3de] pt-8 sm:grid-cols-2">
-              <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-[#6b5d3e]" />
-                <span className="text-xs font-semibold uppercase tracking-[0.18em]">
-                  Premium mahsulot
-                </span>
+            {/* Benefits - Compact on Mobile */}
+            <div className="mt-8 grid grid-cols-2 gap-3 border-t border-neutral-200 pt-6">
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-goldAccent/10 text-goldAccent">
+                  <CheckCircle size={16} />
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">Premium</span>
               </div>
-
-              <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-[#6b5d3e]" />
-                <span className="text-xs font-semibold uppercase tracking-[0.18em]">
-                  Sifat kafolati
-                </span>
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-goldAccent/10 text-goldAccent">
+                  <CheckCircle size={16} />
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">Kafolat</span>
               </div>
             </div>
           </div>
         </div>
 
-        <section className="mt-16 lg:mt-28">
-          <div className="overflow-x-auto border-b border-[#e3e3de]">
-            <div className="flex min-w-max gap-8">
+        {/* Tabs Section - More compact spacing */}
+        <section className="mt-12 lg:mt-24">
+          <div className="flex gap-8 border-b border-neutral-200">
+            {(["description", "specifications"] as TabKey[]).map((tab) => (
               <button
-                onClick={() => setActiveTab("description")}
-                className={`border-b-2 pb-4 pt-2 font-serif text-lg transition ${activeTab === "description"
-                    ? "border-[#0c1f12] font-bold text-[#1b1c19]"
-                    : "border-transparent text-[#434843] hover:text-[#1b1c19]"
-                  }`}
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`pb-3 text-sm font-bold uppercase tracking-widest transition-all ${
+                  activeTab === tab 
+                    ? "border-b-2 border-greenDeep text-greenDeep" 
+                    : "text-neutral-400 hover:text-neutral-600"
+                }`}
               >
-                Tavsif
+                {tab === "description" ? "Tavsif" : "Xususiyatlar"}
               </button>
-
-              <button
-                onClick={() => setActiveTab("specifications")}
-                className={`border-b-2 pb-4 pt-2 font-serif text-lg transition ${activeTab === "specifications"
-                    ? "border-[#0c1f12] font-bold text-[#1b1c19]"
-                    : "border-transparent text-[#434843] hover:text-[#1b1c19]"
-                  }`}
-              >
-                Xususiyatlar
-              </button>
-            </div>
+            ))}
           </div>
 
-          {activeTab === "description" && (
-            <div className="py-10">
-              <div className="max-w-3xl text-base leading-8 text-[#434843]">
-                <p>{product.description}</p>
+          <div className="py-8 transition-all duration-300">
+            {activeTab === "description" ? (
+              <div className="max-w-3xl animate-fadeIn">
+                <p className="text-sm leading-relaxed text-neutral-600 sm:text-base sm:leading-8">
+                  {product.description}
+                </p>
               </div>
-            </div>
-          )}
-
-          {activeTab === "specifications" && (
-            <div className="py-10">
-              <div className="max-w-2xl rounded-[28px] bg-[#efeee9] p-6 sm:p-8">
-                <h4 className="font-serif text-2xl font-bold text-[#1b1c19]">
-                  Xususiyatlar
-                </h4>
-
-                <div className="mt-6 space-y-4">
-                  <div className="flex items-center justify-between gap-4 border-b border-black/10 pb-3">
-                    <span className="text-[#434843]">Nomi</span>
-                    <span className="font-semibold text-[#1b1c19]">
-                      {product.name}
-                    </span>
+            ) : (
+              <div className="max-w-2xl rounded-3xl bg-neutral-100 p-6 sm:p-8 animate-fadeIn">
+                <div className="space-y-4">
+                  <div className="flex justify-between border-b border-neutral-200 pb-3">
+                    <span className="text-sm text-neutral-500">Nomi</span>
+                    <span className="text-sm font-bold text-greenDeep">{product.name}</span>
                   </div>
-
-                  <div className="flex items-center justify-between gap-4 pb-3">
-                    <span className="text-[#434843]">Narxi</span>
-                    <span className="font-semibold text-[#1b1c19]">
-                      {Number(product.price).toLocaleString()} UZS
-                    </span>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-neutral-500">Artikul</span>
+                    <span className="text-sm font-bold text-greenDeep">#{product.id}</span>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </section>
       </main>
       <Footer />
